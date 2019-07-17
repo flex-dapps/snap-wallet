@@ -134,7 +134,7 @@ app.use((state, emitter) => {
 app.use(require('./stores/events'))
 // app.use(require('./stores/provider'))
 app.use(require('./blockchain/utils/ethereum'))
-app.use(require('./stores/eth/utils'))
+// app.use(require('./stores/eth/utils'))
 
 app.use(require('./stores/wallet'))
 app.use(require('./stores/calculate'))
