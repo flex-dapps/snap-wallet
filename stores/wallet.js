@@ -11,6 +11,8 @@
 
 module.exports = store
 
+import { sendTokenTx } from './eth/utils'
+
 const ethers = require('ethers')
 
 const abi = require('../contracts/ERC223TOKEN.abi')
@@ -98,8 +100,7 @@ async function store(state, emitter) {
       if (value > wallet.tokenBalance) {
         state.assist.notify('error', `Balance too low`)
         if (error && typeof error === 'function') error()
-        return
-      }
+        return     }
       sendTokenTransaction(to, value, bytes, messages)
       emitter.emit('nextTx.sent')
     }
@@ -126,21 +127,11 @@ async function store(state, emitter) {
 
   // sends a token transaction (currently hardcoded to a single wallet token)
   // uses the standard token tx messages unless you pass in something as messages
+
   async function sendTokenTransaction(to, value, bytes = '0x', messages = {}) {
     const txMessages = Object.assign(getDefaultTokenMessages(value), messages)
     const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
-    const c = wallet.tokenContract.connect(wallet.burner)
-    const nonce = await state.provider.getTransactionCount(wallet.address)
-    const tx = c['transfer(address,uint256,bytes)'](to, value, bytes, {
-      gasPrice: ethers.utils.parseUnits('1', 'gwei'), // default on xDAI
-      // gasLimit: ethers.utils.bigNumberify(500000).toHexString(),
-      nonce: nonce
-    })
-    tx.then(async r => {
-      await r.wait()
-      dismiss()
-      state.assist.notify('success', txMessages.txConfirmed())
-    })
+    sendTokenTx(to, value, bytes);
   }
 
   // gets the default token sending messages (should allow tokens to set a
