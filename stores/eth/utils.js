@@ -13,4 +13,13 @@ export async function sendTokenTx(to, value, bytes = '0x') {
         dismiss()
         state.assist.notify('success', txMessages.txConfirmed())
     })
+}
+
+export async function getTokenBalance(contract, address) {
+    try {
+        const b = await contract.balanceOf(address)
+        return b.toNumber()
+    } catch (e) {
+        return -1
     }
+}

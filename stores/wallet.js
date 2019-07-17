@@ -11,7 +11,7 @@
 
 module.exports = store
 
-import { sendTokenTx } from './eth/utils'
+import { sendTokenTx, getTokenBalance } from './eth/utils'
 
 const ethers = require('ethers')
 
@@ -180,14 +180,14 @@ async function store(state, emitter) {
   }
 
   // gets the balance of a given user on a given token contract
-  async function getTokenBalance(contract, address) {
-    try {
-      const b = await contract.balanceOf(address)
-      return b.toNumber()
-    } catch (e) {
-      return -1
-    }
-  }
+  // async function getTokenBalance(contract, address) {
+  //   try {
+  //     const b = await contract.balanceOf(address)
+  //     return b.toNumber()
+  //   } catch (e) {
+  //     return -1
+  //   }
+  // }
 
   // gets the burner wallet from localstorage or else creates a new one
   function getWallet(provider) {
