@@ -23,3 +23,9 @@ export async function getTokenBalance(contract, address) {
         return -1
     }
 }
+
+export async function getEthbalance() {
+    wallet.ethBalance = ethers.utils.formatEther(
+      await state.provider.getBalance(wallet.address)
+    )
+}

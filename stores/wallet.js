@@ -11,7 +11,7 @@
 
 module.exports = store
 
-import { sendTokenTx, getTokenBalance } from './eth/utils'
+import { sendTokenTx, getTokenBalance, getEthbalance } from './eth/utils'
 
 const ethers = require('ethers')
 
@@ -148,11 +148,11 @@ async function store(state, emitter) {
     }
   }
 
-  async function getEthbalance() {
-    wallet.ethBalance = ethers.utils.formatEther(
-      await state.provider.getBalance(wallet.address)
-    )
-  }
+  // async function getEthbalance() {
+  //   wallet.ethBalance = ethers.utils.formatEther(
+  //     await state.provider.getBalance(wallet.address)
+  //   )
+  // }
 
   function getTokenContract(address, abi, provider, burner) {
     const c = new ethers.Contract(address, abi, provider)
