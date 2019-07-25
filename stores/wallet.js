@@ -13,8 +13,6 @@ module.exports = store
 
 import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract, getWallet } from './eth/utils'
 
-const ethers = require('ethers')
-
 const abi = require('../contracts/ERC223TOKEN.abi')
 
 const DEFAULT_STATE = {
@@ -112,6 +110,8 @@ async function store(state, emitter) {
     wallet.refreshFuncs.push(f)
   })
 
+  console.log('wallet dawg', wallet)
+
   // function which gets the balance of the user in a token then renders an update
   async function setTokenBalance() {
     try {
@@ -134,6 +134,8 @@ async function store(state, emitter) {
     sendTokenTx(to, value, bytes);
   }
 
+  // ------------------ NOTIFICATION STUFF ------------------------
+
   // gets the default token sending messages (should allow tokens to set a
   // symbol or something like that)
   function getDefaultTokenMessages(value) {
@@ -147,18 +149,6 @@ async function store(state, emitter) {
         `Sent ${state.CURRENCY_SYMBOL}${Number(value).toLocaleString()}`
     }
   }
-
-  // async function getEthbalance() {
-  //   wallet.ethBalance = ethers.utils.formatEther(
-  //     await state.provider.getBalance(wallet.address)
-  //   )
-  // }
-
-  // function getTokenContract(address, abi, provider, burner) {
-  //   const c = new ethers.Contract(address, abi, provider)
-  //   // connect our burner account with the contract so we can send txs
-  //   return c.connect(burner)
-  // }
 
   function setupTransferNotifications(
     { tokenContract, address, refresh },
@@ -179,6 +169,20 @@ async function store(state, emitter) {
     })
   }
 
+  // ----------- MOVED FUNCTIONS (now live in stores/eth/utils) ----------------
+
+  // async function getEthbalance() {
+  //   wallet.ethBalance = ethers.utils.formatEther(
+  //     await state.provider.getBalance(wallet.address)
+  //   )
+  // }
+
+  // function getTokenContract(address, abi, provider, burner) {
+  //   const c = new ethers.Contract(address, abi, provider)
+  //   // connect our burner account with the contract so we can send txs
+  //   return c.connect(burner)
+  // }
+  
   // gets the balance of a given user on a given token contract
   // async function getTokenBalance(contract, address) {
   //   try {
@@ -201,6 +205,4 @@ async function store(state, emitter) {
   //   }
   //   return w
   // }
-
-  console.log('wallet dawg', wallet);
 }
