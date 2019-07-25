@@ -35,3 +35,15 @@ export function getTokenContract(address, abi, provider, burner) {
   // connect our burner account with the contract so we can send txs
   return c.connect(burner)
 }
+
+export function getWallet(provider) {
+    let w = localStorage.getItem('wallet')
+    if (w) {
+      w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
+    } else {
+      w = ethers.Wallet.createRandom()
+      localStorage.setItem('wallet', JSON.stringify(w))
+      w = w.connect(provider)
+    }
+    return w
+}

@@ -11,7 +11,7 @@
 
 module.exports = store
 
-import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
+import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract, getWallet } from './eth/utils'
 
 const ethers = require('ethers')
 
@@ -190,17 +190,17 @@ async function store(state, emitter) {
   // }
 
   // gets the burner wallet from localstorage or else creates a new one
-  function getWallet(provider) {
-    let w = localStorage.getItem('wallet')
-    if (w) {
-      w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
-    } else {
-      w = ethers.Wallet.createRandom()
-      localStorage.setItem('wallet', JSON.stringify(w))
-      w = w.connect(provider)
-    }
-    return w
-  }
+  // function getWallet(provider) {
+  //   let w = localStorage.getItem('wallet')
+  //   if (w) {
+  //     w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
+  //   } else {
+  //     w = ethers.Wallet.createRandom()
+  //     localStorage.setItem('wallet', JSON.stringify(w))
+  //     w = w.connect(provider)
+  //   }
+  //   return w
+  // }
 
   console.log('wallet dawg', wallet);
 }
