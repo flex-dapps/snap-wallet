@@ -1,4 +1,4 @@
-
+var ethers = require('ethers');
 
 export async function sendTokenTx(to, value, bytes = '0x') {
     const c = wallet.tokenContract.connect(wallet.burner) // this file
@@ -28,4 +28,10 @@ export async function getEthbalance() {
     wallet.ethBalance = ethers.utils.formatEther(
       await state.provider.getBalance(wallet.address)
     )
+}
+
+export function getTokenContract(address, abi, provider, burner) {
+  const c = new ethers.Contract(address, abi, provider)
+  // connect our burner account with the contract so we can send txs
+  return c.connect(burner)
 }

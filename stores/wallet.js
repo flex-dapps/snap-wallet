@@ -11,7 +11,7 @@
 
 module.exports = store
 
-import { sendTokenTx, getTokenBalance, getEthbalance } from './eth/utils'
+import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
 
 const ethers = require('ethers')
 
@@ -154,11 +154,11 @@ async function store(state, emitter) {
   //   )
   // }
 
-  function getTokenContract(address, abi, provider, burner) {
-    const c = new ethers.Contract(address, abi, provider)
-    // connect our burner account with the contract so we can send txs
-    return c.connect(burner)
-  }
+  // function getTokenContract(address, abi, provider, burner) {
+  //   const c = new ethers.Contract(address, abi, provider)
+  //   // connect our burner account with the contract so we can send txs
+  //   return c.connect(burner)
+  // }
 
   function setupTransferNotifications(
     { tokenContract, address, refresh },
@@ -201,4 +201,6 @@ async function store(state, emitter) {
     }
     return w
   }
+
+  console.log('wallet dawg', wallet);
 }
