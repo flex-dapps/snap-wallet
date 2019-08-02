@@ -13,8 +13,8 @@ module.exports = (state, emit) => {
     {
       margin: 1,
       color: {
-        light: '#A7E4AE',
-        dark: '#2A333E'
+        light: '#F0B90B',
+        dark: '#333'
       },
       scale: 10
     },

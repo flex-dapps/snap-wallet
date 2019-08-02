@@ -1,24 +1,24 @@
 @font-face {
-  font-family: 'VT323';
-  src: url('/assets/VT323-Regular.ttf') format('truetype');
+  font-family: 'ArialMTStdLight';
+  src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype');
 }
 
 html {
   font-size: 17px;
 }
 @media (max-width: 900px) {
-  html { font-size: 15px; }
+  html { font-size: 12px; }
 }
 @media (max-width: 400px) {
-  html { font-size: 13px; }
+  html { font-size: 10px; }
 }
 
 body {
   width: 100vw;
-  background: #2A333E;
+  background: #333;
   height: 100vh;
-  color: #A7E4AE;
-  font-family: 'VT323';
+  color: #F0B90B;
+  font-family: 'ArialMTStdLight';
 }
 
 section {
@@ -26,11 +26,11 @@ section {
 }
 
 a, button {
-  color: #A7E4AE;
+  color: #F0B90B;
   text-decoration: none;
   outline: none;
   border-style: hidden;
-  background: #2A333E;
+  background: #333;
 }
 
 a:hover,
@@ -39,8 +39,8 @@ button:hover,
 button:active,
 button:focus,
 button.active {
-  background: #A7E4AE;
-  color: #2A333E !important;
+  background: #F0B90B;
+  color: #333 !important;
   border-style: hidden;
   outline: none;
 }

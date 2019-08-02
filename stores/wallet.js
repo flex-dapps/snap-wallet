@@ -115,7 +115,7 @@ async function store(state, emitter) {
   // function which gets the balance of the user in a token then renders an update
   async function setTokenBalance() {
     try {
-      wallet.tokenBalance = await getTokenBalance(
+        wallet.tokenBalance = await getTokenBalance(
         wallet.tokenContract,
         wallet.address
       )
@@ -131,6 +131,8 @@ async function store(state, emitter) {
   async function sendTokenTransaction(to, value, bytes = '0x', messages = {}) {
     const txMessages = Object.assign(getDefaultTokenMessages(value), messages)
     const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
+    const c = state.wallet.tokenContract.connect(wallet.burner) // this file
+    const nonce = await state.provider.getTransactionCount(wallet.address) //this file
     sendTokenTx(to, value, bytes);
   }
 

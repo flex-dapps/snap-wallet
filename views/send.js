@@ -56,7 +56,7 @@ module.exports = (state, emit) => {
     }
     .action-overlay a::hover,
     .action-overlay a::active {
-      background: #a7e4ae !important;
+      background: #F0B90B !important;
     }
   `
 

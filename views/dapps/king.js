@@ -28,35 +28,35 @@ module.exports = (state, emit) => {
     }
 
     .push-button-text.active {
-      color: #2a333e;
-      background: #a7e4ae;
+      color: #333;
+      background: #F0B90B;
     }
 
     .push-button-text.pending {
-      color: #a7e4ae;
+      color: #F0B90B;
       background: transparent;
     }
 
     .era-buttons .active {
-      background: #a7e4ae;
-      color: #2a333e;
+      background: #F0B90B;
+      color: #333;
     }
 
     @keyframes pulse {
       from {
-        box-shadow: 0px 0px 20px 5px #a7e4ae;
+        box-shadow: 0px 0px 20px 5px #F0B90B;
       }
       to {
-        box-shadow: 0px 0px 40px 20px #a7e4ae;
+        box-shadow: 0px 0px 40px 20px #F0B90B;
       }
     }
 
     @keyframes pulse-slow {
       from {
-        box-shadow: 0px 0px 10px 5px #a7e4ae;
+        box-shadow: 0px 0px 10px 5px #F0B90B;
       }
       to {
-        box-shadow: 0px 0px 20px 10px #a7e4ae;
+        box-shadow: 0px 0px 20px 10px #F0B90B;
       }
     }
   `

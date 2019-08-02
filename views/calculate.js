@@ -11,7 +11,7 @@ module.exports = (state, emit) => {
     .phat-caret {
       width: 1.5rem;
       height: 3rem;
-      background: #a7e4ae;
+      background: #F0B90B;
     }
 
     .keypad div button,
@@ -20,8 +20,8 @@ module.exports = (state, emit) => {
     }
 
     .proceed {
-      background: #a7e4ae80;
-      color: #2a333e;
+      background: #F0B90B80;
+      color: #333;
     }
   `
 

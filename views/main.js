@@ -19,7 +19,7 @@ function view(state, emit) {
 
     .actions a {
       font-size: 5rem;
-      color: #a7e4ae;
+      color: #F0B90B;
     }
 
     .disabled {

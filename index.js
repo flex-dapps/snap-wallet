@@ -41,12 +41,12 @@ app.use((state, emitter) => {
         // you would think i enjoy using !important but i don't, promise
         css: `
           @font-face {
-            font-family: 'VT323';
-            src: url('/assets/VT323-Regular.ttf') format('truetype');
+            font-family: 'ArialMTStdLight';
+            src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype');
           }
           p {
-            font-family: 'VT323';
-            color: #A7E4AE;
+            font-family: 'ArialMTStdLight';
+            color: #F0B90B;
             letter-spacing: 0.1rem;
             font-size: 1.5rem;
           }
@@ -58,7 +58,7 @@ app.use((state, emitter) => {
             justify-content: flex-end;
           }
           .bn-notification {
-            background: #2A333E;
+            background: #333;
             padding: 5px;
             margin: 0;
             display: flex;
@@ -93,14 +93,14 @@ app.use((state, emitter) => {
             background-image: none !important;
           }
           .bn-progress .bn-status-icon::after {
-            color: #A7E4AE;
+            color: #F0B90B;
             content: "⋮";
             animation: loading 0.5s infinite;
             position: relative;
             display: inherit;
           }
           .bn-complete .bn-status-icon::after {
-            color: #A7E4AE;
+            color: #F0B90B;
             content: "✓";
             position: relative;
             display: inherit;

@@ -14,7 +14,7 @@ function view(state, emit) {
     .bad:active span .status-icon,
     .bad:hover span .status-icon {
       background: red;
-      color: #2a333e;
+      color: #333;
     }
 
     .status-icon {
@@ -23,7 +23,7 @@ function view(state, emit) {
       width: 20px;
       height: auto;
       background-image: none !important;
-      color: #a7e4ae;
+      color: #F0B90B;
     }
 
     .status-icon.loading::after {
