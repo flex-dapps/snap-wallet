@@ -17,6 +17,28 @@ export function getWallet(client){
     return w
 }
 
-export function getBnbBalance(client, address){
-    return client.getBalance(address)
+export async function getBalance(client, address, symbol){
+    try {
+        let output;
+        const b = await client.getBalance(address)
+        b.map((bal) => {
+            if(bal.symbol === symbol){
+                output = Math.trunc(bal.free);
+            }
+        })
+        return output;
+    } catch (e) {
+        return -1
+    }
+
+    // client.getBalance(address).then((b) => {
+    //     b.forEach(bal => {
+    //         if(bal.symbol === symbol){
+    //             // console.log('bal', bal)
+    //             output = bal
+    //         }
+    //     })
+    //     console.log('output', output)
+    //     return output;
+    // })
 }

@@ -12,9 +12,7 @@
 module.exports = store
 
 import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
-import { getWallet, getBnbBalance } from './bnb/utils'
-
-const abi = require('../contracts/ERC223TOKEN.abi')
+import { getWallet, getBalance } from './bnb/utils'
 
 const DEFAULT_STATE = {
   qr: null,
@@ -49,11 +47,10 @@ async function store(state, emitter) {
   wallet.address = JSON.parse(wallet.burner).address // for convenience
 
   // getBalance
-  getBnbBalance(state.client, wallet.address).then((b) => {
-    console.log('bnbbalance', b)
-  })
+  wallet.tokenBalance = await getBalance(state.client, wallet.address, "BNB")
 
-
+  emitter.emit('render')
+  
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
   // getSomeGas()
@@ -114,7 +111,7 @@ async function store(state, emitter) {
     }
   )
 
-  wallet.refreshFuncs.push(setTokenBalance, getEthbalance)
+  wallet.refreshFuncs.push(setTokenBalance, getBalance)
 
   emitter.on('wallet.addRefreshFunc', f => {
     wallet.refreshFuncs.push(f)
