@@ -14,10 +14,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use((state, emitter) => {
+
+  // -- BNB TEST API --
+  state.JSON_RPC_URL = 'https://testnet-dex.binance.org/'
+  // state.TOKEN_ADDRESS // dont need
+  // state.NETWORK_ID // dont need
+
   // -- XDAI TEST CONTRACTS --
-  state.JSON_RPC_URL = 'https://dai.poa.network/'
-  state.TOKEN_ADDRESS = '0x5eb7e67ec2ce404ebabafed0a79bab10d030c58a'
-  state.NETWORK_ID = 100
+  // state.JSON_RPC_URL = 'https://dai.poa.network/'
+  // state.TOKEN_ADDRESS = '0x5eb7e67ec2ce404ebabafed0a79bab10d030c58a'
+  // state.NETWORK_ID = 100
 
   // -- GOERLI CONTRACTS --
   // state.JSON_RPC_URL = 'https://xdai.flexdapps.com:7361/'
@@ -134,6 +140,7 @@ app.use((state, emitter) => {
 app.use(require('./stores/events'))
 // app.use(require('./stores/eth/utils'))
 app.use(require('./stores/eth/provider'))
+app.use(require('./stores/bnb/client'))
 
 app.use(require('./stores/wallet'))
 app.use(require('./stores/calculate'))
@@ -148,8 +155,8 @@ app.use(require('./stores/dapps/config'))
 //   app.use(require(path))
 // }
 
-app.use(require('./stores/dapps/vip'))
-app.use(require('./stores/dapps/king'))
+// app.use(require('./stores/dapps/vip'))
+// app.use(require('./stores/dapps/king'))
 
 app.route('/', require('./views/main'))
 app.route('/get', require('./views/get'))

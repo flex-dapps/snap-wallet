@@ -11,6 +11,7 @@
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
   },
   "dependencies": {
+    "@binance-chain/javascript-sdk": "^2.14.5",
     "bnc-assist": "^0.8.2",
     "choo": "^6.13.3",
     "choo-service-worker": "^2.4.0",

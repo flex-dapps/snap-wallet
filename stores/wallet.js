@@ -13,11 +13,12 @@ module.exports = store
 
 import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract, getWallet } from './eth/utils'
 
+
 const abi = require('../contracts/ERC223TOKEN.abi')
 
 const DEFAULT_STATE = {
   qr: null,
-  ethBalance: Number(-1), // or xDAI
+  bnbBalance: Number(-1), // or xDAI
   tokenContract: null,
   tokenBalance: 0,
   address: '0x0000000000000000000000000000000000000000',
@@ -43,32 +44,34 @@ async function store(state, emitter) {
   state.wallet = Object.assign({}, DEFAULT_STATE)
   let wallet = state.wallet // convenience
   // creates a wallet if there is not already one in localstorage
-  wallet.burner = getWallet(state.provider)
-  wallet.address = wallet.burner.signingKey.address // for convenience
+  // wallet.burner = getWallet(state.provider)
+  // wallet.address = wallet.burner.signingKey.address // for convenience
 
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
   // getSomeGas()
 
   // set this such that other parts of our application can refresh the wallet UI
-  wallet.refresh = () => {
-    for (let refreshFunc of wallet.refreshFuncs) {
-      refreshFunc()
-    }
-  }
+  // wallet.refresh = () => {
+  //   for (let refreshFunc of wallet.refreshFuncs) {
+  //     refreshFunc()
+  //   }
+  // }
 
   // grab a contract instance attached to our burner wallet
-  wallet.tokenContract = getTokenContract(
-    state.TOKEN_ADDRESS,
-    abi,
-    state.provider,
-    wallet.burner
-  )
+  // wallet.tokenContract = getTokenContract(
+  //   state.TOKEN_ADDRESS,
+  //   abi,
+  //   state.provider,
+  //   wallet.burner
+  // )
 
   // set up an event listener and notifications for the transfer function
-  setupTransferNotifications(wallet, state)
+  // setupTransferNotifications(wallet, state)
 
-  setTokenBalance()
+  // setTokenBalance()
+
+  console.log('bnbclient', state.client)
 
   // a whole bunch of events for you to configure the 'confirm' screen in the
   // wallet. YOU DON'T HAVE TO USE THE CONFIRM SCREEN, this is just a handy
@@ -109,8 +112,6 @@ async function store(state, emitter) {
   emitter.on('wallet.addRefreshFunc', f => {
     wallet.refreshFuncs.push(f)
   })
-
-  console.log('wallet dawg', wallet)
 
   // function which gets the balance of the user in a token then renders an update
   async function setTokenBalance() {
