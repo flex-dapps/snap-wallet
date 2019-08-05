@@ -12,7 +12,11 @@ export function getWallet(client){
         w = client.createAccount();
         localStorage.setItem('bnbwallet', JSON.stringify(w))
         // connect to client (maybe)
-        
+
     }
     return w
+}
+
+export function getBnbBalance(client, address){
+    return client.getBalance(address)
 }

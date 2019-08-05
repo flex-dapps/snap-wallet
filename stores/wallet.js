@@ -12,13 +12,13 @@
 module.exports = store
 
 import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
-import { getWallet } from './bnb/utils'
+import { getWallet, getBnbBalance } from './bnb/utils'
 
 const abi = require('../contracts/ERC223TOKEN.abi')
 
 const DEFAULT_STATE = {
   qr: null,
-  bnbBalance: Number(-1), // or xDAI
+  bnbBalance: Number(-1), 
   tokenContract: null,
   tokenBalance: 0,
   address: '0x0000000000000000000000000000000000000000',
@@ -47,6 +47,12 @@ async function store(state, emitter) {
   // creates a wallet if there is not already one in localstorage
   wallet.burner = getWallet(state.client)
   wallet.address = JSON.parse(wallet.burner).address // for convenience
+
+  // getBalance
+  getBnbBalance(state.client, wallet.address).then((b) => {
+    console.log('bnbbalance', b)
+  })
+
 
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
