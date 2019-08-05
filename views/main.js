@@ -36,13 +36,8 @@ function view(state, emit) {
     <section class="flex flex-column justify-between pa4 pt5">
       <div class="wallet-status">
         <div class="f-subheadline">
-          =${state.CURRENCY_SYMBOL}${state.wallet.tokenBalance.toLocaleString() ||
-            0}=
-        </div>
-        <div class="vip-status">
-          VIP${state.vip.meVip ? '_' + state.vip.meIndex : ''}=${state.vip.meVip
-            ? 'TRUE'
-            : 'FALSE'}
+          ◆${state.CURRENCY_SYMBOL}${state.wallet.tokenBalance.toLocaleString() ||
+            0}◆
         </div>
         <div class="vip-status">
           DEBUG_BAL=${Number(state.wallet.ethBalance)
@@ -60,5 +55,11 @@ function view(state, emit) {
 }
 
 /**
- *
+ *  
+ *  <div class="vip-status">
+      VIP${state.vip.meVip ? '_' + state.vip.meIndex : ''}=${state.vip.meVip
+        ? 'TRUE'
+        : 'FALSE'}
+    </div> 
+ * 
  */

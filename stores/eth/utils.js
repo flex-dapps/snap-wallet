@@ -1,6 +1,6 @@
 var ethers = require('ethers');
 
-export async function sendTokenTx(to, value, bytes = '0x') {
+export async function sendTokenTx(to, value, bytes = '0x', c, nonce) {
   const tx = c['transfer(address,uint256,bytes)'](to, value, bytes, { //this file
       gasPrice: ethers.utils.parseUnits('1', 'gwei'), // default on xDAI
       // gasLimit: ethers.utils.bigNumberify(500000).toHexString(),

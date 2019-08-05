@@ -133,7 +133,8 @@ async function store(state, emitter) {
     const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
     const c = state.wallet.tokenContract.connect(wallet.burner) // this file
     const nonce = await state.provider.getTransactionCount(wallet.address) //this file
-    sendTokenTx(to, value, bytes);
+    // sendTokenTx(to, value, bytes, c, nonce);
+    sendTokenTx(to, value, bytes, c, nonce)
   }
 
   // ------------------ NOTIFICATION STUFF ------------------------
