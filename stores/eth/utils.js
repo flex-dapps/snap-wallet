@@ -1,5 +1,18 @@
 var ethers = require('ethers');
 
+
+export function getWallet(provider) {
+  let w = localStorage.getItem('wallet')
+  if (w) {
+    w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
+  } else {
+    w = ethers.Wallet.createRandom()
+    localStorage.setItem('wallet', JSON.stringify(w))
+    w = w.connect(provider)
+  }
+  return w
+}
+
 export async function sendTokenTx(to, value, bytes = '0x', c, nonce) {
   const tx = c['transfer(address,uint256,bytes)'](to, value, bytes, { //this file
       gasPrice: ethers.utils.parseUnits('1', 'gwei'), // default on xDAI
@@ -32,16 +45,4 @@ export function getTokenContract(address, abi, provider, burner) {
   const c = new ethers.Contract(address, abi, provider)
   // connect our burner account with the contract so we can send txs
   return c.connect(burner)
-}
-
-export function getWallet(provider) {
-    let w = localStorage.getItem('wallet')
-    if (w) {
-      w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
-    } else {
-      w = ethers.Wallet.createRandom()
-      localStorage.setItem('wallet', JSON.stringify(w))
-      w = w.connect(provider)
-    }
-    return w
 }
