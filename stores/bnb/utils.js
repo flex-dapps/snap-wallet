@@ -1,18 +1,19 @@
 // import sdk
 
+
 // -------- utility functions -------------
 
 export function getWallet(client){
     let w = localStorage.getItem('bnbwallet')
     if (w) {
-        // do nothing?
-
+        console.log('private key', JSON.parse(w).privateKey)
+        client.setPrivateKey(JSON.parse(w).privateKey);
     } else {
         // create wallet
         w = client.createAccount();
         localStorage.setItem('bnbwallet', JSON.stringify(w))
         // connect to client (maybe)
-
+        client.setPrivateKey(JSON.parse(w).privateKey);
     }
     return w
 }
@@ -30,15 +31,4 @@ export async function getBalance(client, address, symbol){
     } catch (e) {
         return -1
     }
-
-    // client.getBalance(address).then((b) => {
-    //     b.forEach(bal => {
-    //         if(bal.symbol === symbol){
-    //             // console.log('bal', bal)
-    //             output = bal
-    //         }
-    //     })
-    //     console.log('output', output)
-    //     return output;
-    // })
 }

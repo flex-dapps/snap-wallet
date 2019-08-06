@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use((state, emitter) => {
 
-  // -- BNB TEST API --
+  // -- BNB TESTNET API --
   state.JSON_RPC_URL = 'https://testnet-dex.binance.org/'
   // state.TOKEN_ADDRESS // dont need
   // state.NETWORK_ID // dont need

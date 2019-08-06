@@ -11,6 +11,8 @@
 
 module.exports = store
 
+const axios = require('axios');
+
 import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
 import { getWallet, getBalance } from './bnb/utils'
 
@@ -50,7 +52,9 @@ async function store(state, emitter) {
   wallet.tokenBalance = await getBalance(state.client, wallet.address, "BNB")
 
   emitter.emit('render')
-  
+
+  console.log('bnbClient', state.client)
+
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
   // getSomeGas()
@@ -62,9 +66,9 @@ async function store(state, emitter) {
   //   }
   // }
 
-  // grab a contract instance attached to our burner wallet
+  // grab a contract instance attached to our burner wallets
   // wallet.tokenContract = getTokenContract(
-  //   state.TOKEN_ADDRESS,
+  //   state.TOKEN_ADDRESS,s
   //   abi,
   //   state.provider,
   //   wallet.burner
@@ -74,8 +78,6 @@ async function store(state, emitter) {
   // setupTransferNotifications(wallet, state)
 
   // setTokenBalance()
-
-  console.log('bnbclient', state.client)
 
   // a whole bunch of events for you to configure the 'confirm' screen in the
   // wallet. YOU DON'T HAVE TO USE THE CONFIRM SCREEN, this is just a handy
@@ -97,7 +99,7 @@ async function store(state, emitter) {
 
   // send the wallet's tokens (this is hardcoded to an ERC223 at the moment)
   // @todo add a function param so that methods other than tokenFallback can be
-  // called on the receiving contract
+  // called on the receiving contracts
   emitter.on(
     'wallet.sendTokens',
     async (to, value, bytes = '0x', messages, error) => {
@@ -106,7 +108,7 @@ async function store(state, emitter) {
         state.assist.notify('error', `Balance too low`)
         if (error && typeof error === 'function') error()
         return     }
-      sendTokenTransaction(to, value, bytes, messages)
+      sendTokenTransaction(wallet.address, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, "BNB", "testy test")
       emitter.emit('nextTx.sent')
     }
   )
@@ -133,14 +135,58 @@ async function store(state, emitter) {
   // sends a token transaction (currently hardcoded to a single wallet token)
   // uses the standard token tx messages unless you pass in something as messages
 
-  async function sendTokenTransaction(to, value, bytes = '0x', messages = {}) {
-    const txMessages = Object.assign(getDefaultTokenMessages(value), messages)
-    const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
-    const c = state.wallet.tokenContract.connect(wallet.burner) // this file
-    const nonce = await state.provider.getTransactionCount(wallet.address) //this file
-    // sendTokenTx(to, value, bytes, c, nonce);
-    sendTokenTx(to, value, bytes, c, nonce)
-  }
+  // async function sendTokenTransaction(to, value, bytes = '0x', messages = {}) {
+  //   const txMessages = Object.assign(getDefaultTokenMessages(value), messages)
+  //   const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
+  //   const c = state.wallet.tokenContract.connect(wallet.burner) // this file
+  //   const nonce = await state.provider.getTransactionCount(wallet.address) //this file
+  //   // sendTokenTx(to, value, bytes, c, nonce);
+  //   sendTokenTx(to, value, bytes, c, nonce)
+  // }
+
+async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
+
+
+  const httpClient = axios.create({ baseURL: state.JSON_RPC_URL });
+  const sequenceURL = `${state.JSON_RPC_URL}api/v1/account/${addrFrom}/sequence`;
+
+  // console.log('stuff', httpClient)
+
+  // httpClient
+  //   .get(sequenceURL)
+  //   .then((res) => {
+  //       // const sequence = res.data.sequence || 0
+  //       const sequence = 0
+  //       return state.client.transfer(addrFrom, addrTo, value, asset, message, sequence)
+  //   })
+  //   .then((result) => {
+  //           console.log(result);
+  //       if (result.status === 200) {
+  //           console.log('success', result.result[0].hash);
+  //       } else {
+  //           console.error('error', result);
+  //       }
+  //   })
+  //   .catch((error) => {
+  //       console.error('error', error);
+  //   });
+  
+  const blah = state.client.transfer("tbnb1u5kztk9qapu3y4vh7jflwgquakvj48f2guht9y", addrTo, value, asset).then((res) => console.log('res', res))
+  
+  console.log('blah', addrFrom)
+  // console.log('here')
+    // .then((result) => {
+    //     console.log('result', result);
+    //     if (result.status === 200) {
+    //         console.log('success', result.result[0].hash);
+    //     } else {
+    //         console.error('error', result);
+    //     }
+    // })
+    // .catch((error) => {
+    //     console.error('error', error);
+    // });
+}
 
   // ------------------ NOTIFICATION STUFF ------------------------
 
