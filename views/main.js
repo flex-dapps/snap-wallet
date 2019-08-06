@@ -36,7 +36,7 @@ function view(state, emit) {
     <section class="flex flex-column justify-between pa4 pt5">
       <div class="wallet-status">
         <div class="f-subheadline">
-          ◆${state.CURRENCY_SYMBOL}${state.wallet.tokenBalance.toLocaleString() ||
+          ◆${state.CURRENCY_SYMBOL}${Number(state.wallet.tokenBalance).toFixed(2) ||
             0}◆
         </div>
         <div class="vip-status">

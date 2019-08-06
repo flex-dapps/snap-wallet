@@ -24,7 +24,7 @@ export async function getBalance(client, address, symbol){
         const b = await client.getBalance(address)
         b.map((bal) => {
             if(bal.symbol === symbol){
-                output = Math.trunc(bal.free);
+                output = bal.free;
             }
         })
         return output;
