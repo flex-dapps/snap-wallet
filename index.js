@@ -35,7 +35,8 @@ app.use((state, emitter) => {
   // state.TOKEN_ADDRESS = '0xDBA081ff3cc5921a784A788Cf5a49Dd7A8F9B83F'
   // state.NETWORK_ID = 5777
 
-  state.CURRENCY_SYMBOL = '៛'
+  // state.CURRENCY_SYMBOL = '៛'
+  state.CURRENCY_SYMBOL = '◆'
   emitter.on('DOMContentLoaded', () => {
     state.assist = bnc.init({
       dappId: '6981d7c2-9e6f-420f-9772-228a8c0d4534',

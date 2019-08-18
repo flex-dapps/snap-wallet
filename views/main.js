@@ -2,24 +2,83 @@ const html = require('choo/html')
 const css = require('sheetify')
 
 const TITLE = 'FLEXBUXX'
+const snapLogo = '../assets/snap_logo_no_opacity_cropped.png'
 
 module.exports = view
+
+
+const bep2 = [
+  {
+    symbol: 'TKN',
+    amt: '42.40',
+  },
+  {
+    symbol: 'BLA',
+    amt: '133.63',
+  },
+  {
+    symbol: 'TIT',
+    amt: '1.37',
+  },
+  {
+    symbol: '',
+    amt: '...',
+  },
+]
 
 function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
   const styles = css`
-    .wallet-status {
+    .header {
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      width: 100%;
+      font-size: 5rem;
+      border-radius: 10px 10px 0px 0px;
+      background-color: white;
+      border-bottom: 5px solid black;
+    }
+
+    .subHeading {
+      padding-left: 2%;
+      font-size: 2rem;
+      background-color: grey;
+    }
+
+    .list {
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 5%;
+      background: grey;
+      margin: auto;
+      font-size: 2rem;
+      border-bottom: 0px solid grey;
+      border-radius: 0px 0px 10px 10px;
+    }
+
+    .token {
+      border-bottom: 2px solid #333;
+      border-radius: 3px;
+      background-color: white;
+    }
+    .footer {
       text-align: center;
     }
 
-    .vip-status {
-      font-size: 2rem;
+    .logo {
+      margin: auto;
+      width: 65%;
+    }
+
+    .amt {
+      color: #333;
     }
 
     .actions a {
       font-size: 5rem;
-      color: #F0B90B;
+      color: #FFF;
     }
 
     .disabled {
@@ -33,22 +92,38 @@ function view(state, emit) {
   `
 
   return html`
-    <section class="flex flex-column justify-between pa4 pt5">
+    <section class="flex flex-column justify-between center pa4 pt5">
       <div class="wallet-status">
-        <div class="f-subheadline">
-          ◆${state.CURRENCY_SYMBOL}${Number(state.wallet.tokenBalance).toFixed(2) ||
-            0}◆
+        <div class="header">
+          BNB: ${state.CURRENCY_SYMBOL}${Number(state.wallet.tokenBalance).toFixed(2) ||
+            0}
         </div>
-        <div class="vip-status">
-          DEBUG_BAL=${Number(state.wallet.ethBalance)
-            ? Number(state.wallet.ethBalance).toFixed(5)
-            : 0}
+        <div class="subHeading">
+          BEP-2 tokens:
         </div>
+        <div class="list flex flex-column">
+          ${bep2.map((token, i) => {
+            return html`
+              <div class="token w-100 flex flex-row justify-around">
+                <div class="w-33">
+                  ${token.symbol}                
+                </div>
+                <div class="amt w-33">
+                  ${token.amt}                
+                </div>
+              </div>
+            `
+          })}
+        </div>
+      </div> 
+      <div class="actions flex flex-row w-100 tc">
+        <a class="w-50" href="/get">get</a>
+        <a class="w-50" href="/send">send</a>
       </div>
-      <div class="actions flex flex-column tc">
-        <a href="/get">GET</a>
-        <a href="/send">SEND</a>
-        <a href="/dapps">APPS</a>
+      <div class="block flex flex-column tc">
+        <img class="logo"
+          src=${snapLogo} />
+        <p>binance X flexdapps 👊</p>
       </div>
     </section>
   `
@@ -62,4 +137,14 @@ function view(state, emit) {
         : 'FALSE'}
     </div> 
  * 
- */
+◆
+
+<div class="vip-status">
+  DEBUG_BAL=${Number(state.wallet.ethBalance)
+    ? Number(state.wallet.ethBalance).toFixed(5)
+    : 0}
+</div>
+
+
+
+ */ 

@@ -1,6 +1,8 @@
 @font-face {
-  font-family: 'ArialMTStdLight';
-  src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype');
+  /* font-family: 'ArialMTStdLight'; */
+  font-family: 'VT323';
+  /* src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype'); */
+  src: url('/assets/VT323-Regular.ttf') format('truetype');
 }
 
 html {
@@ -17,8 +19,9 @@ body {
   width: 100vw;
   background: #333;
   height: 100vh;
+  /* color: #F0B90B; */
   color: #F0B90B;
-  font-family: 'ArialMTStdLight';
+  font-family: 'VT323';
 }
 
 section {
@@ -26,7 +29,7 @@ section {
 }
 
 a, button {
-  color: #F0B90B;
+  color: #FFF;
   text-decoration: none;
   outline: none;
   border-style: hidden;
