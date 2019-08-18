@@ -3,6 +3,7 @@ const css = require('sheetify')
 
 const TITLE = 'FLEXBUXX'
 const snapLogo = '../assets/snap_logo_no_opacity_cropped.png'
+const bnbSymbol = '../assets/binance-coin-logo-png-transparent.png'
 
 module.exports = view
 
@@ -72,6 +73,10 @@ function view(state, emit) {
       width: 65%;
     }
 
+    .symbol {
+      height: 3rem;
+    }
+
     .amt {
       color: #333;
     }
@@ -95,7 +100,10 @@ function view(state, emit) {
     <section class="flex flex-column justify-between center pa4 pt5">
       <div class="wallet-status">
         <div class="header">
-          BNB: ${state.CURRENCY_SYMBOL}${Number(state.wallet.tokenBalance).toFixed(2) ||
+          BNB: 
+          <img class="symbol"
+            src=${bnbSymbol} />
+          ${Number(state.wallet.tokenBalance).toFixed(2) ||
             0}
         </div>
         <div class="subHeading">
