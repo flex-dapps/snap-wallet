@@ -45,14 +45,14 @@ function view(state, emit) {
     .subHeading {
       padding-left: 2%;
       font-size: 2rem;
-      background-color: grey;
+      background-color: #7B7B7B;
     }
 
     .list {
       padding-left: 5%;
       padding-right: 5%;
       padding-bottom: 5%;
-      background: grey;
+      background: #7B7B7B;
       margin: auto;
       font-size: 2rem;
       border-bottom: 0px solid grey;
