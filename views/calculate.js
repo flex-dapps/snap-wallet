@@ -9,8 +9,8 @@ module.exports = (state, emit) => {
 
   const style = css`
     .phat-caret {
-      width: 1.5rem;
-      height: 3rem;
+      width: 2rem;
+      height: 4rem;
       background: #F0B90B;
     }
 
@@ -36,7 +36,7 @@ module.exports = (state, emit) => {
   return html`
     <section class="flex flex-column pa0 items-center tc justify-between">
       <div class="flex tc f-subheadline pa5 items-center">
-        ${state.CURRENCY_SYMBOL}${state.calculate.formattedInput !== '0'
+        ${state.calculate.formattedInput !== '0'
           ? state.calculate.formattedInput
           : ''}
         <span class="phat-caret"></span>

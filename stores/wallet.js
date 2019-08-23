@@ -108,7 +108,8 @@ async function store(state, emitter) {
         state.assist.notify('error', `Balance too low`)
         if (error && typeof error === 'function') error()
         return     }
-      sendTokenTransaction(wallet.address, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, "BNB", "testy test")
+      // sendTokenTransaction(wallet.address, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, "BNB", "testy test")
+      sendTokenTransaction(wallet.address, to, value, "BNB", "outgoing tx")
       emitter.emit('nextTx.sent')
     }
   )

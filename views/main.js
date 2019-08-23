@@ -21,7 +21,7 @@ const bep2 = [
     amt: '1.37'
   },
   {
-    symbol: 'aaa',
+    symbol: '',
     amt: '...'
   }
 ]
@@ -67,7 +67,7 @@ function view(state, emit) {
     }
 
     .symbol {
-      height: 3rem;
+      height: 1rem;
     }
 
     .amt {
