@@ -7,25 +7,24 @@ const bnbSymbol = '../assets/binance-coin-logo-png-transparent.png'
 
 module.exports = view
 
-
-const bep2 = [
-  {
-    symbol: 'TKN',
-    amt: '42.40',
-  },
-  {
-    symbol: 'BLA',
-    amt: '133.63',
-  },
-  {
-    symbol: 'TIT',
-    amt: '1.37',
-  },
-  {
-    symbol: '',
-    amt: '...',
-  },
-]
+// const bep2 = [
+//   {
+//     symbol: 'TKN',
+//     amt: '42.40'
+//   },
+//   {
+//     symbol: 'BLA',
+//     amt: '133.63'
+//   },
+//   {
+//     symbol: 'ABC',
+//     amt: '1.37'
+//   },
+//   {
+//     symbol: 'aaa',
+//     amt: '...'
+//   }
+// ]
 
 function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
@@ -35,35 +34,29 @@ function view(state, emit) {
       text-align: center;
       padding-top: 5px;
       padding-bottom: 5px;
-      width: 100%;
-      font-size: 5rem;
-      border-radius: 10px 10px 0px 0px;
+      margin: auto;
+      width: 80%;
+      font-size: 3rem;
       background-color: white;
-      border-bottom: 5px solid black;
+      border-bottom: 1px solid black;
     }
 
     .subHeading {
       padding-left: 2%;
       font-size: 2rem;
-      background-color: #7B7B7B;
     }
 
     .list {
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 5%;
-      background: #7B7B7B;
+      padding: 5%;
       margin: auto;
       font-size: 2rem;
-      border-bottom: 0px solid grey;
-      border-radius: 0px 0px 10px 10px;
+      border-bottom: 1px solid black
+      width: 80%
     }
 
     .token {
-      border-bottom: 2px solid #333;
-      border-radius: 3px;
-      background-color: white;
     }
+
     .footer {
       text-align: center;
     }
@@ -82,8 +75,7 @@ function view(state, emit) {
     }
 
     .actions a {
-      font-size: 5rem;
-      color: #FFF;
+      font-size: 3rem;
     }
 
     .disabled {
@@ -106,9 +98,6 @@ function view(state, emit) {
           ${Number(state.wallet.tokenBalance).toFixed(2) ||
             0}
         </div>
-        <div class="subHeading">
-          BEP-2 tokens:
-        </div>
         <div class="list flex flex-column">
           ${bep2.map((token, i) => {
             return html`
@@ -129,8 +118,6 @@ function view(state, emit) {
         <a class="w-50" href="/send">send</a>
       </div>
       <div class="block flex flex-column tc">
-        <img class="logo"
-          src=${snapLogo} />
         <p>binance X flexdapps 👊</p>
       </div>
     </section>
@@ -153,6 +140,9 @@ function view(state, emit) {
     : 0}
 </div>
 
+
+<img class="logo"
+          src=${snapLogo} />
 
 
  */ 

@@ -1,8 +1,8 @@
 @font-face {
-  /* font-family: 'ArialMTStdLight'; */
   font-family: 'VT323';
-  /* src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype'); */
   src: url('/assets/VT323-Regular.ttf') format('truetype');
+  /* font-family: 'Museo_Slab';
+  src: url('/assets/Museo_Slab_500.otf') format('truetype'); */
 }
 
 html {
@@ -17,11 +17,11 @@ html {
 
 body {
   width: 100vw;
-  background: #333;
+  background: #fff;
   height: 100vh;
   /* color: #F0B90B; */
   color: #F0B90B;
-  font-family: 'VT323';
+  font-family: 'Museo_Slab';
 }
 
 section {
@@ -29,11 +29,11 @@ section {
 }
 
 a, button {
-  color: #FFF;
+  color: #333;
   text-decoration: none;
   outline: none;
   border-style: hidden;
-  background: #333;
+  background: #FFF;
 }
 
 a:hover,
