@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'VT323';
-  src: url('/assets/VT323-Regular.ttf') format('truetype');
-  /* font-family: 'Museo_Slab';
-  src: url('/assets/Museo_Slab_500.otf') format('truetype'); */
+  /* font-family: 'VT323';
+  src: url('/assets/VT323-Regular.ttf') format('truetype'); */
+  font-family: 'Museo_Slab';
+  src: url('/assets/Museo_Slab_500.otf') format('truetype');
 }
 
 html {

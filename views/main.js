@@ -7,24 +7,24 @@ const bnbSymbol = '../assets/binance-coin-logo-png-transparent.png'
 
 module.exports = view
 
-// const bep2 = [
-//   {
-//     symbol: 'TKN',
-//     amt: '42.40'
-//   },
-//   {
-//     symbol: 'BLA',
-//     amt: '133.63'
-//   },
-//   {
-//     symbol: 'ABC',
-//     amt: '1.37'
-//   },
-//   {
-//     symbol: 'aaa',
-//     amt: '...'
-//   }
-// ]
+const bep2 = [
+  {
+    symbol: 'TKN',
+    amt: '42.40'
+  },
+  {
+    symbol: 'BLA',
+    amt: '133.63'
+  },
+  {
+    symbol: 'ABC',
+    amt: '1.37'
+  },
+  {
+    symbol: 'aaa',
+    amt: '...'
+  }
+]
 
 function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
@@ -50,8 +50,8 @@ function view(state, emit) {
       padding: 5%;
       margin: auto;
       font-size: 2rem;
-      border-bottom: 1px solid black
-      width: 80%
+      border-bottom: 1px solid black;
+      width: 80%;
     }
 
     .token {
@@ -87,6 +87,8 @@ function view(state, emit) {
       color: unset;
     }
   `
+  
+  // return html`<div></div>`
 
   return html`
     <section class="flex flex-column justify-between center pa4 pt5">
