@@ -1,6 +1,5 @@
 const css = require('sheetify')
 const choo = require('choo')
-const bnc = require('bnc-assist')
 require('babel-polyfill')
 
 css('tachyons')
@@ -37,105 +36,105 @@ app.use((state, emitter) => {
 
   // state.CURRENCY_SYMBOL = '៛'
   state.CURRENCY_SYMBOL = '◆'
-  emitter.on('DOMContentLoaded', () => {
-    state.assist = bnc.init({
-      dappId: '6981d7c2-9e6f-420f-9772-228a8c0d4534',
-      networkId: state.NETWORK_ID,
-      mobileBlocked: false,
-      style: {
-        darkMode: true,
-        notificationsPosition: 'top',
-        // you would think i enjoy using !important but i don't, promise
-        css: `
-          @font-face {
-            font-family: 'ArialMTStdLight';
-            src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype');
-          }
-          p {
-            font-family: 'ArialMTStdLight';
-            color: #F0B90B;
-            letter-spacing: 0.1rem;
-            font-size: 1.5rem;
-          }
-          #blocknative-notifications {
-            padding: 0;
-          }
-          .bn-notifications {
-            height: 3.5rem;
-            justify-content: flex-end;
-          }
-          .bn-notification {
-            background: #333;
-            padding: 5px;
-            margin: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 3.5rem;
-          }
-          .bn-notification span,
-          .bn-notification div,
-          .bn-notification a {
-            margin: 0 !important;
-          }
-          .bn-notification-meta {
-            display: none;
-          }
-          #bn-transaction-branding {
-            position: relative !important;
-            background-size: 66px 22px !important;
-            bottom: unset !important;
-            right: unset !important;
-            align-self: unset !important;
-            margin: 0 !important;
-          }
-          a#bn-transaction-branding {
-            align-self: unset !important;
-            height: 30px !important;
-          }
-          .bn-status-icon {
-            text-align: center;
-            width: 20px;
-            height: auto;
-            background-image: none !important;
-          }
-          .bn-progress .bn-status-icon::after {
-            color: #F0B90B;
-            content: "⋮";
-            animation: loading 0.5s infinite;
-            position: relative;
-            display: inherit;
-          }
-          .bn-complete .bn-status-icon::after {
-            color: #F0B90B;
-            content: "✓";
-            position: relative;
-            display: inherit;
-          }
-          .bn-failed .bn-status-icon::after {
-            color: red;
-            content: "✕";
-            position: relative;
-            display: inherit;
-          }
-          @keyframes loading {
-            0% {
-              content: "⋮";
-            }
-            25% {
-              content: "⋰";
-            }
-            50% {
-              content: "⋯";
-            }
-            75% {
-              content: "⋱";
-            }
-          }
-        `
-      }
-    })
-  })
+  // emitter.on('DOMContentLoaded', () => {
+  //   state.assist = bnc.init({
+  //     dappId: '6981d7c2-9e6f-420f-9772-228a8c0d4534',
+  //     networkId: state.NETWORK_ID,
+  //     mobileBlocked: false,
+  //     style: {
+  //       darkMode: true,
+  //       notificationsPosition: 'top',
+  //       // you would think i enjoy using !important but i don't, promise
+  //       css: `
+  //         @font-face {
+  //           font-family: 'ArialMTStdLight';
+  //           src: url('/assets/Arial-MT-Std-Light.ttf') format('truetype');
+  //         }
+  //         p {
+  //           font-family: 'ArialMTStdLight';
+  //           color: #F0B90B;
+  //           letter-spacing: 0.1rem;
+  //           font-size: 1.5rem;
+  //         }
+  //         #blocknative-notifications {
+  //           padding: 0;
+  //         }
+  //         .bn-notifications {
+  //           height: 3.5rem;
+  //           justify-content: flex-end;
+  //         }
+  //         .bn-notification {
+  //           background: #333;
+  //           padding: 5px;
+  //           margin: 0;
+  //           display: flex;
+  //           justify-content: space-between;
+  //           align-items: center;
+  //           height: 3.5rem;
+  //         }
+  //         .bn-notification span,
+  //         .bn-notification div,
+  //         .bn-notification a {
+  //           margin: 0 !important;
+  //         }
+  //         .bn-notification-meta {
+  //           display: none;
+  //         }
+  //         #bn-transaction-branding {
+  //           position: relative !important;
+  //           background-size: 66px 22px !important;
+  //           bottom: unset !important;
+  //           right: unset !important;
+  //           align-self: unset !important;
+  //           margin: 0 !important;
+  //         }
+  //         a#bn-transaction-branding {
+  //           align-self: unset !important;
+  //           height: 30px !important;
+  //         }
+  //         .bn-status-icon {
+  //           text-align: center;
+  //           width: 20px;
+  //           height: auto;
+  //           background-image: none !important;
+  //         }
+  //         .bn-progress .bn-status-icon::after {
+  //           color: #F0B90B;
+  //           content: "⋮";
+  //           animation: loading 0.5s infinite;
+  //           position: relative;
+  //           display: inherit;
+  //         }
+  //         .bn-complete .bn-status-icon::after {
+  //           color: #F0B90B;
+  //           content: "✓";
+  //           position: relative;
+  //           display: inherit;
+  //         }
+  //         .bn-failed .bn-status-icon::after {
+  //           color: red;
+  //           content: "✕";
+  //           position: relative;
+  //           display: inherit;
+  //         }
+  //         @keyframes loading {
+  //           0% {
+  //             content: "⋮";
+  //           }
+  //           25% {
+  //             content: "⋰";
+  //           }
+  //           50% {
+  //             content: "⋯";
+  //           }
+  //           75% {
+  //             content: "⋱";
+  //           }
+  //         }
+  //       `
+  //     }
+  //   })
+  // })
 })
 //animation: loading 5s infinite;
 app.use(require('./stores/events'))
