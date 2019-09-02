@@ -114,24 +114,24 @@ async function store(state, emitter) {
     }
   )
 
-  wallet.refreshFuncs.push(setTokenBalance, getBalance)
+  wallet.refreshFuncs.push(getBalance)
 
   emitter.on('wallet.addRefreshFunc', f => {
     wallet.refreshFuncs.push(f)
   })
 
   // function which gets the balance of the user in a token then renders an update
-  async function setTokenBalance() {
-    try {
-        wallet.tokenBalance = await getTokenBalance(
-        wallet.tokenContract,
-        wallet.address
-      )
-      emitter.emit('render')
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // async function setTokenBalance() {
+  //   try {
+  //       wallet.tokenBalance = await getTokenBalance(
+  //       wallet.tokenContract,
+  //       wallet.address
+  //     )
+  //     emitter.emit('render')
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
   // sends a token transaction (currently hardcoded to a single wallet token)
   // uses the standard token tx messages unless you pass in something as messages

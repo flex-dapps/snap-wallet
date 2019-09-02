@@ -15,9 +15,6 @@ I recommend opening it up in a tab with the mobile UI simulator on, otherwise th
 
 We've used choojs as the "framework" for the app, which gives us some pretty lightweight state and UI management capabilities.
 
-We're using [Blocknative Assist](https://blocknative.com) for the transaction notifications.
-
-
 ## Commands
 Command                | Description                                      |
 -----------------------|--------------------------------------------------|
