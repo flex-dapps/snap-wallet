@@ -104,11 +104,10 @@ async function store(state, emitter) {
     'wallet.sendTokens',
     async (to, value, bytes = '0x', messages, error) => {
       // handle not enough cash here
-      if (value > wallet.tokenBalance) {
-        state.assist.notify('error', `Balance too low`)
+      if (Number(value) > Number(wallet.tokenBalance)) {
         if (error && typeof error === 'function') error()
-        return     }
-      // sendTokenTransaction(wallet.address, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, "BNB", "testy test")
+        return
+      }
       sendTokenTransaction(wallet.address, to, value, "BNB", "outgoing tx")
       emitter.emit('nextTx.sent')
     }
@@ -133,60 +132,28 @@ async function store(state, emitter) {
   //   }
   // }
 
-  // sends a token transaction (currently hardcoded to a single wallet token)
-  // uses the standard token tx messages unless you pass in something as messages
-
-  // async function sendTokenTransaction(to, value, bytes = '0x', messages = {}) {
-  //   const txMessages = Object.assign(getDefaultTokenMessages(value), messages)
-  //   const dismiss = state.assist.notify('pending', txMessages.txSent(), -1)
-  //   const c = state.wallet.tokenContract.connect(wallet.burner) // this file
-  //   const nonce = await state.provider.getTransactionCount(wallet.address) //this file
-  //   // sendTokenTx(to, value, bytes, c, nonce);
-  //   sendTokenTx(to, value, bytes, c, nonce)
-  // }
-
 async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
-
 
   const httpClient = axios.create({ baseURL: state.JSON_RPC_URL });
   const sequenceURL = `${state.JSON_RPC_URL}api/v1/account/${addrFrom}/sequence`;
 
-  // console.log('stuff', httpClient)
-
-  // httpClient
-  //   .get(sequenceURL)
-  //   .then((res) => {
-  //       // const sequence = res.data.sequence || 0
-  //       const sequence = 0
-  //       return state.client.transfer(addrFrom, addrTo, value, asset, message, sequence)
-  //   })
-  //   .then((result) => {
-  //           console.log(result);
-  //       if (result.status === 200) {
-  //           console.log('success', result.result[0].hash);
-  //       } else {
-  //           console.error('error', result);
-  //       }
-  //   })
-  //   .catch((error) => {
-  //       console.error('error', error);
-  //   });
-  
-  const blah = state.client.transfer("tbnb1u5kztk9qapu3y4vh7jflwgquakvj48f2guht9y", addrTo, value, asset).then((res) => console.log('res', res))
-  
-  console.log('blah', addrFrom)
-  // console.log('here')
-    // .then((result) => {
-    //     console.log('result', result);
-    //     if (result.status === 200) {
-    //         console.log('success', result.result[0].hash);
-    //     } else {
-    //         console.error('error', result);
-    //     }
-    // })
-    // .catch((error) => {
-    //     console.error('error', error);
-    // });
+  httpClient
+    .get(sequenceURL)
+    .then((res) => {
+        // const sequence = res.data.sequence || 0
+        return state.client.transfer(addrFrom, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, asset)
+    })
+    .then((result) => {
+            console.log(result);
+        if (result.status === 200) {
+            console.log('success', result.result[0].hash);
+        } else {
+            console.error('error', result);
+        }
+    })
+    .catch((error) => {
+        console.error('error', error);
+    });
 }
 
   // ------------------ NOTIFICATION STUFF ------------------------
