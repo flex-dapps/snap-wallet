@@ -141,7 +141,7 @@ async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
     .get(sequenceURL)
     .then((res) => {
         // const sequence = res.data.sequence || 0
-        return state.client.transfer(addrFrom, "tbnb1un950smk6nzke56pfjmz4kc7j9ceuyutjv908p", value, asset)
+        return state.client.transfer(addrFrom, addrTo, value, asset)
     })
     .then((result) => {
             console.log(result);
@@ -155,7 +155,6 @@ async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
         console.error('error', error);
     });
 }
-
   // ------------------ NOTIFICATION STUFF ------------------------
 
   // gets the default token sending messages (should allow tokens to set a
