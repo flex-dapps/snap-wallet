@@ -18,7 +18,7 @@ export function getWallet(client){
     return w
 }
 
-export async function getBalance(client, address, symbol){
+export async function getTokenBalance(client, address, symbol){
     try {
         let output;
         const b = await client.getBalance(address)

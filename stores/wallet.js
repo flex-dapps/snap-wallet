@@ -13,28 +13,27 @@ module.exports = store
 
 const axios = require('axios');
 
-import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
-import { getWallet, getBalance } from './bnb/utils'
+// import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
+import { getWallet, getTokenBalance } from './bnb/utils'
 
 const DEFAULT_STATE = {
   qr: null,
-  bnbBalance: Number(-1), 
-  tokenContract: null,
-  tokenBalance: 0,
+  BNBBalance: 0,
+  tokenBalances:[],
   address: '0x0000000000000000000000000000000000000000',
   burner: {
     signingKey: {
       privateKey: '0x0000000000000000000000000000000000000000'
     }
   },
-  nextTx: {
-    beforeParams: `You're sending`,
-    price: -1,
-    joiningStatement: '',
-    param: '',
-    afterParams: ``,
-    cta: `Swipe to confirm`
-  },
+  // nextTx: {
+  //   beforeParams: `You're sending`,
+  //   price: -1,
+  //   joiningStatement: '',
+  //   param: '',
+  //   afterParams: ``,
+  //   cta: `Swipe to confirm`
+  // },
   afterConfirm: () => {},
   afterSend: () => {}, // allow specification of a callback after send
   refreshFuncs: [] // allow addition of functions which "refresh" the app
@@ -48,12 +47,13 @@ async function store(state, emitter) {
   wallet.burner = getWallet(state.client)
   wallet.address = JSON.parse(wallet.burner).address // for convenience
 
-  // getBalance
-  wallet.tokenBalance = await getBalance(state.client, wallet.address, "BNB")
+  // get BNB balance
+  wallet.BNBBalance = await getTokenBalance(state.client, wallet.address, "BNB")
 
   emitter.emit('render')
 
   console.log('bnbClient', state.client)
+  console.log('wallet', state.wallet)
 
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
@@ -104,7 +104,7 @@ async function store(state, emitter) {
     'wallet.sendTokens',
     async (to, value, bytes = '0x', messages, error) => {
       // handle not enough cash here
-      if (Number(value) > Number(wallet.tokenBalance)) {
+      if (Number(value) > Number(wallet.BNBBalance)) {
         if (error && typeof error === 'function') error()
         return
       }
@@ -113,24 +113,11 @@ async function store(state, emitter) {
     }
   )
 
-  wallet.refreshFuncs.push(getBalance)
+  wallet.refreshFuncs.push(getTokenBalance)
 
   emitter.on('wallet.addRefreshFunc', f => {
     wallet.refreshFuncs.push(f)
   })
-
-  // function which gets the balance of the user in a token then renders an update
-  // async function setTokenBalance() {
-  //   try {
-  //       wallet.tokenBalance = await getTokenBalance(
-  //       wallet.tokenContract,
-  //       wallet.address
-  //     )
-  //     emitter.emit('render')
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
 async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
 

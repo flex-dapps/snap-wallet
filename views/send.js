@@ -32,8 +32,10 @@ module.exports = (state, emit) => {
     }
     emit('pushState', '/calculate')
   }
-  if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
-
+  if (state.title !== TITLE) {
+    emit(state.events.DOMTITLECHANGE, TITLE)
+  }
+  
   const style = css`
     .video {
       object-fit: cover;

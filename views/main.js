@@ -67,7 +67,7 @@ function view(state, emit) {
     }
 
     .symbol {
-      height: 1rem;
+      height: 2rem;
     }
 
     .amt {
@@ -87,8 +87,6 @@ function view(state, emit) {
       color: unset;
     }
   `
-  
-  // return html`<div></div>`
 
   return html`
     <section class="flex flex-column justify-between center pa4 pt5">
@@ -97,7 +95,7 @@ function view(state, emit) {
           BNB: 
           <img class="symbol"
             src=${bnbSymbol} />
-          ${Number(state.wallet.tokenBalance).toFixed(2) ||
+          ${Number(state.wallet.BNBBalance).toFixed(2) ||
             0}
         </div>
         <div class="list flex flex-column">
@@ -105,16 +103,16 @@ function view(state, emit) {
             return html`
               <div class="token w-100 flex flex-row justify-around">
                 <div class="w-33">
-                  ${token.symbol}                
+                  ${token.symbol}
                 </div>
                 <div class="amt w-33">
-                  ${token.amt}                
+                  ${token.amt}
                 </div>
               </div>
             `
           })}
         </div>
-      </div> 
+      </div>
       <div class="actions flex flex-row w-100 tc">
         <a class="w-50" href="/get">get</a>
         <a class="w-50" href="/send">send</a>

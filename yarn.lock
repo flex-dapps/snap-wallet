@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@babel/polyfill@^7.0.0":
-  version "7.4.4"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.4.4.tgz#78801cf3dbe657844eeabf31c1cae3828051e893"
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.2"
-
 "@babel/runtime@^7.0.0-beta.35":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
@@ -22,10 +15,10 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@binance-chain/javascript-sdk@^2.14.5":
-  version "2.14.5"
-  resolved "https://registry.yarnpkg.com/@binance-chain/javascript-sdk/-/javascript-sdk-2.14.5.tgz#95ed9554cee7343f03a15101a7d426f17858e06d"
-  integrity sha512-oLMa/8/1ZsD7DmUAN9QDAA0fxt3mgFDD3Qin2I97Z2yQ/yBqVtv7XGDSlgRNoa8ajPbBQR+NNBfHmX18Bi8xRA==
+"@binance-chain/javascript-sdk@2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@binance-chain/javascript-sdk/-/javascript-sdk-2.15.0.tgz#08a3c5da0261394c5e44732035ec3d159019432f"
+  integrity sha512-uiHwhfPd1PU/Klnr3PewMgHzvj5ccxe3i4a96J80U0kdlNQoZ5E9Tt0wMJP2G4ygQ+2/2Wa6X1LaBzikap3k/g==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@ledgerhq/hw-transport-u2f" "^4.63.2"
@@ -1276,7 +1269,7 @@ bluebird@^2.9.34:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
 
-bluebird@^3.5.0, bluebird@^3.5.3:
+bluebird@^3.5.0:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.4.tgz#d6cc661595de30d5b3af5fcedd3c0b3ef6ec5714"
 
@@ -1287,17 +1280,6 @@ bn.js@4.11.6:
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.6, bn.js@^4.11.8, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
-
-bnc-assist@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/bnc-assist/-/bnc-assist-0.8.2.tgz#0e0f1a15e407be0b865988f38ed5956ddcaac1d5"
-  integrity sha512-bL2qycrxddOoBYNYHaWdPVonlJSkUHaXeUgoklKvUMuqUkZz6UXQ5Tdpb/qkM+1yoUEPmclKYMlogrhkGPGrCA==
-  dependencies:
-    "@babel/polyfill" "^7.0.0"
-    bluebird "^3.5.3"
-    bowser "^2.0.0-beta.3"
-    core-js "2"
-    uuid "^3.3.2"
 
 body-parser@1.18.3:
   version "1.18.3"
@@ -1328,10 +1310,6 @@ body-parser@^1.16.0:
     qs "6.7.0"
     raw-body "2.4.0"
     type-is "~1.6.17"
-
-bowser@^2.0.0-beta.3:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/bowser/-/bowser-2.3.0.tgz#624798388d972ec9639eb877629bca8ffd415c60"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -2054,12 +2032,7 @@ copy-descriptor@^0.1.0:
   version "1.0.4"
   resolved "https://codeload.github.com/deliriousrhino/copy-text-to-clipboard/tar.gz/d1305ccfbbaad58d4ad4a3a4a80bbb366eaba582"
 
-core-js@2:
-  version "2.6.9"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
-  integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
-
-core-js@^2.0.0, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.6.5:
+core-js@^2.0.0, core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
 
