@@ -7,25 +7,6 @@ const bnbSymbol = '../assets/binance-coin-logo-png-transparent.png'
 
 module.exports = view
 
-const bep2 = [
-  {
-    symbol: 'TKN',
-    amt: '42.40'
-  },
-  {
-    symbol: 'BLA',
-    amt: '133.63'
-  },
-  {
-    symbol: 'ABC',
-    amt: '1.37'
-  },
-  {
-    symbol: '',
-    amt: '...'
-  }
-]
-
 function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
@@ -49,7 +30,7 @@ function view(state, emit) {
     .list {
       padding: 5%;
       margin: auto;
-      font-size: 2rem;
+      font-size: 1.5rem;
       border-bottom: 1px solid black;
       width: 80%;
     }
@@ -87,6 +68,8 @@ function view(state, emit) {
       color: unset;
     }
   `
+  
+  const bep2 = state.wallet.tokenBalances;
 
   return html`
     <section class="flex flex-column justify-between center pa4 pt5">
@@ -106,7 +89,7 @@ function view(state, emit) {
                   ${token.symbol}
                 </div>
                 <div class="amt w-33">
-                  ${token.amt}
+                  ${Number(token.free).toFixed(2)}
                 </div>
               </div>
             `

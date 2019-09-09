@@ -14,12 +14,12 @@ module.exports = store
 const axios = require('axios');
 
 // import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
-import { getWallet, getTokenBalance } from './bnb/utils'
+import { getWallet, getAccountBalance } from './bnb/utils'
 
 const DEFAULT_STATE = {
   qr: null,
   BNBBalance: 0,
-  tokenBalances:[],
+  tokenBalances:[], 
   address: '0x0000000000000000000000000000000000000000',
   burner: {
     signingKey: {
@@ -47,13 +47,29 @@ async function store(state, emitter) {
   wallet.burner = getWallet(state.client)
   wallet.address = JSON.parse(wallet.burner).address // for convenience
 
+  
+  // get all balances
+  const allBalances = await getAccountBalance(state.client, wallet.address)
+  
   // get BNB balance
-  wallet.BNBBalance = await getTokenBalance(state.client, wallet.address, "BNB")
+  allBalances.map((bal) => {
+    if(bal.symbol === "BNB"){
+      wallet.BNBBalance = bal.free;
+    }
+  })
+
+  // get BEP2 balances
+  allBalances.map((bal) => {
+    if(bal.symbol != "BNB"){
+      wallet.tokenBalances.push(bal);
+    }
+  })
 
   emitter.emit('render')
 
   console.log('bnbClient', state.client)
   console.log('wallet', state.wallet)
+  console.log('BNBbalance', wallet.BNBBalance)
 
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
@@ -113,7 +129,7 @@ async function store(state, emitter) {
     }
   )
 
-  wallet.refreshFuncs.push(getTokenBalance)
+  wallet.refreshFuncs.push(getAccountBalance)
 
   emitter.on('wallet.addRefreshFunc', f => {
     wallet.refreshFuncs.push(f)
