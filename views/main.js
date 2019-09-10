@@ -30,14 +30,21 @@ function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
   const styles = css`
+    body {
+      font-family: 'Archivo Narrow', sans-serif;
+    }
+    section {
+      background-color: whitesmoke;
+    }
+
     .header {
       text-align: center;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding-top: 2rem;
+      padding-bottom: 1rem;
       margin: auto;
       width: 80%;
       font-size: 3rem;
-      background-color: white;
+      background-color: whitesmoke;
       border-bottom: 1px solid black;
     }
 
@@ -52,9 +59,7 @@ function view(state, emit) {
       font-size: 2rem;
       border-bottom: 1px solid black;
       width: 80%;
-    }
-
-    .token {
+      line-height: 2.5rem;
     }
 
     .footer {
@@ -67,15 +72,22 @@ function view(state, emit) {
     }
 
     .symbol {
-      height: 2rem;
+      height: 3rem;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
     }
 
     .amt {
       color: #333;
     }
 
-    .actions a {
-      font-size: 3rem;
+    .button {
+      font-size: 4rem;
+      background-color: transparent;
+      border: #f0b90b 1px solid;
+      border-radius: 40px;
+      margin: 1rem;
+      padding: 0.25rem 3.75rem;
     }
 
     .disabled {
@@ -89,14 +101,12 @@ function view(state, emit) {
   `
 
   return html`
-    <section class="flex flex-column justify-between center pa4 pt5">
+    <section class="flex flex-column justify-between center pr4 pl4 pt5">
       <div class="wallet-status">
         <div class="header">
-          BNB: 
-          <img class="symbol"
-            src=${bnbSymbol} />
-          ${Number(state.wallet.BNBBalance).toFixed(2) ||
-            0}
+          BNB:
+          <img class="symbol" src=${bnbSymbol} />
+          ${Number(state.wallet.BNBBalance).toFixed(2) || 0}
         </div>
         <div class="list flex flex-column">
           ${bep2.map((token, i) => {
@@ -113,11 +123,13 @@ function view(state, emit) {
           })}
         </div>
       </div>
-      <div class="actions flex flex-row w-100 tc">
-        <a class="w-50" href="/get">get</a>
-        <a class="w-50" href="/send">send</a>
+      <div
+        class="actions flex justify-center items-center flex-column w-100 tc"
+      >
+        <a class="button" href="/get">Get</a>
+        <a class="button" href="/send">Send</a>
       </div>
-      <div class="block flex flex-column tc">
+      <div class="block flex flex-column pt4 tc black">
         <p>binance X flexdapps 👊</p>
       </div>
     </section>
@@ -145,4 +157,4 @@ function view(state, emit) {
           src=${snapLogo} />
 
 
- */ 
+ */
