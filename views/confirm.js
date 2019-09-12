@@ -14,7 +14,7 @@ module.exports = (state, emit) => {
       <div class="wallet-status pa4">
         <div class="f3 pa3">${state.wallet.nextTx.beforeParams}</div>
         <div class="f-subheadline pa3">
-          ${state.CURRENCY_SYMBOL}${Number(
+          ${state.calculate.currencySymbol}: ${Number(
             state.wallet.nextTx.price
           ).toLocaleString()}
         </div>

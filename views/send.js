@@ -25,7 +25,7 @@ module.exports = (state, emit) => {
       state.calculate.input = ''
       state.calculate.formattedInput = ''
       state.wallet.afterConfirm = () => {
-        emit('wallet.sendTokens', addr, amount)
+        emit('wallet.sendTokens', addr, amount, state.calculate.currencySymbol)
         emit('pushState', '/')
       }
       emit('pushState', '/confirm')
@@ -60,6 +60,10 @@ module.exports = (state, emit) => {
     .action-overlay a::active {
       background: #F0B90B !important;
     }
+
+    .back {
+      color: #F0B90B;
+    }
   `
 
   return html`
@@ -72,7 +76,7 @@ module.exports = (state, emit) => {
           autoplay
         ></video>
         <div class="actions action-overlay">
-          <a class="pa2" onclick=${() => emit('replaceState', '/')}>BACK</a>
+          <a class="pa2 back" onclick=${() => emit('replaceState', '/')}>BACK</a>
         </div>
         <img class="absolute-center" src="/assets/qr-overlay.png" />
       </div>

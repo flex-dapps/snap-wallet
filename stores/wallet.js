@@ -13,27 +13,28 @@ module.exports = store
 
 const axios = require('axios');
 
-// import { sendTokenTx, getTokenBalance, getEthbalance, getTokenContract } from './eth/utils'
+// import { sendTokenTx, getTokenBalancea, getEthbalance, getTokenContract } from './eth/utils'
 import { getWallet, getAccountBalance } from './bnb/utils'
 
 const DEFAULT_STATE = {
   qr: null,
+  allBalances: [],
   BNBBalance: 0,
-  tokenBalances:[], 
+  tokenBalances:[],
   address: '0x0000000000000000000000000000000000000000',
   burner: {
     signingKey: {
       privateKey: '0x0000000000000000000000000000000000000000'
     }
   },
-  // nextTx: {
-  //   beforeParams: `You're sending`,
-  //   price: -1,
-  //   joiningStatement: '',
-  //   param: '',
-  //   afterParams: ``,
-  //   cta: `Swipe to confirm`
-  // },
+  nextTx: {
+    beforeParams: `You're sending`,
+    price: -1,
+    joiningStatement: '',
+    param: '',
+    afterParams: ``,
+    cta: `Swipe to confirm`
+  },
   afterConfirm: () => {},
   afterSend: () => {}, // allow specification of a callback after send
   refreshFuncs: [] // allow addition of functions which "refresh" the app
@@ -49,17 +50,17 @@ async function store(state, emitter) {
 
   
   // get all balances
-  const allBalances = await getAccountBalance(state.client, wallet.address)
+  wallet.allBalances = await getAccountBalance(state.client, wallet.address)
   
   // get BNB balance
-  allBalances.map((bal) => {
+  wallet.allBalances.map((bal) => {
     if(bal.symbol === "BNB"){
       wallet.BNBBalance = bal.free;
     }
   })
 
   // get BEP2 balances
-  allBalances.map((bal) => {
+  wallet.allBalances.map((bal) => {
     if(bal.symbol != "BNB"){
       wallet.tokenBalances.push(bal);
     }
@@ -69,7 +70,6 @@ async function store(state, emitter) {
 
   console.log('bnbClient', state.client)
   console.log('wallet', state.wallet)
-  console.log('BNBbalance', wallet.BNBBalance)
 
   // this is where you would stick some code that filled the user's wallet with
   // xDAI or whatever, if you were going to do it that way
@@ -118,13 +118,13 @@ async function store(state, emitter) {
   // called on the receiving contracts
   emitter.on(
     'wallet.sendTokens',
-    async (to, value, bytes = '0x', messages, error) => {
+    async (to, value, asset, bytes = '0x', messages, error) => {
       // handle not enough cash here
       if (Number(value) > Number(wallet.BNBBalance)) {
         if (error && typeof error === 'function') error()
         return
       }
-      sendTokenTransaction(wallet.address, to, value, "BNB", "outgoing tx")
+      sendTokenTransaction(wallet.address, to, value, asset, "outgoing tx")
       emitter.emit('nextTx.sent')
     }
   )
@@ -144,7 +144,7 @@ async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
     .get(sequenceURL)
     .then((res) => {
         // const sequence = res.data.sequence || 0
-        return state.client.transfer(addrFrom, addrTo, value, asset)
+        return state.client.transfer(addrFrom, 'tbnb1tw8mfezl50jwjwpw4h0dhn3ut76lqww6el3ut9', value, asset)
     })
     .then((result) => {
             console.log(result);
