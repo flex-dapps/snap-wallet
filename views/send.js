@@ -35,7 +35,7 @@ module.exports = (state, emit) => {
   if (state.title !== TITLE) {
     emit(state.events.DOMTITLECHANGE, TITLE)
   }
-  
+
   const style = css`
     .video {
       object-fit: cover;
@@ -58,7 +58,7 @@ module.exports = (state, emit) => {
     }
     .action-overlay a::hover,
     .action-overlay a::active {
-      background: #F0B90B !important;
+      background: #f0b90b !important;
     }
 
     .back {
@@ -76,7 +76,9 @@ module.exports = (state, emit) => {
           autoplay
         ></video>
         <div class="actions action-overlay">
-          <a class="pa2 back" onclick=${() => emit('replaceState', '/')}>BACK</a>
+          <a class="button pa2" onclick=${() => emit('replaceState', '/')}
+            >Back</a
+          >
         </div>
         <img class="absolute-center" src="/assets/qr-overlay.png" />
       </div>
