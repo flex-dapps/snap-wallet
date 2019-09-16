@@ -30,9 +30,6 @@ function view(state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
   const styles = css`
-    body {
-      font-family: 'Archivo Narrow', sans-serif;
-    }
     section {
       background-color: whitesmoke;
     }
@@ -43,9 +40,18 @@ function view(state, emit) {
       padding-bottom: 1rem;
       margin: auto;
       width: 80%;
-      font-size: 3rem;
+      font-size: 3.5rem;
       background-color: whitesmoke;
       border-bottom: 1px solid black;
+    }
+
+    .tokenListHeader {
+      padding-bottom: 1rem;
+    }
+
+    .tokenName {
+      width: 83%;
+      font-size: 1.5rem;
     }
 
     .subHeading {
@@ -72,7 +78,7 @@ function view(state, emit) {
     }
 
     .symbol {
-      height: 3rem;
+      height: 2.5rem;
       padding-right: 0.5rem;
       padding-left: 0.5rem;
     }
@@ -82,12 +88,11 @@ function view(state, emit) {
     }
 
     .button {
-      font-size: 4rem;
-      background-color: transparent;
-      border: #f0b90b 1px solid;
-      border-radius: 40px;
+      font-size: 3.5rem;
+      background-color: white;
+      border: #f0b90b 5px solid;
       margin: 1rem;
-      padding: 0.25rem 3.75rem;
+      padding: 0.5rem 9rem;
     }
 
     .disabled {
@@ -109,6 +114,9 @@ function view(state, emit) {
           ${Number(state.wallet.BNBBalance).toFixed(2) || 0}
         </div>
         <div class="list flex flex-column">
+          <div class="tokenListHeader flex justify-center items-center">
+            <div class="tokenName gray">BEP2:</div>
+          </div>
           ${bep2.map((token, i) => {
             return html`
               <div class="token w-100 flex flex-row justify-around">

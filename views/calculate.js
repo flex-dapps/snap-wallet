@@ -11,17 +11,20 @@ module.exports = (state, emit) => {
     .phat-caret {
       width: 2rem;
       height: 4rem;
-      background: #F0B90B;
+      background: whitesmoke;
     }
 
     .keypad div button,
     .keypad div span {
       height: 6rem;
+      font-color: black;
     }
 
     .proceed {
-      background: #F0B90B80;
+      background: #f0b90b80;
       color: #333;
+      margin-bottom: 1rem;
+      margin-right: 0.5rem;
     }
   `
 
@@ -143,7 +146,7 @@ module.exports = (state, emit) => {
           <button
             class="w-33"
             onclick=${() => {
-              synth.triggerAttackRelease('C6', '8n')
+              synth.triggerAttackRelease('C4', '8n')
               emit('numPress', '0')
             }}
           >
@@ -157,7 +160,7 @@ module.exports = (state, emit) => {
           </button>
           <span class="w-33"></span>
           <button
-            class="w-33 proceed"
+            class="w-34 proceed"
             onclick=${() => {
               emit('nextTx.setPrice', state.calculate.input)
               state.afterCalculate(state.calculate.input)

@@ -9,31 +9,36 @@ html {
   font-size: 17px;
 }
 @media (max-width: 900px) {
-  html { font-size: 12px; }
+  html {
+    font-size: 12px;
+  }
 }
 @media (max-width: 400px) {
-  html { font-size: 10px; }
+  html {
+    font-size: 10px;
+  }
 }
 
 body {
   width: 100vw;
-  background: #fff;
+  background: whitesmoke;
   height: 100vh;
   /* color: #F0B90B; */
-  color: #F0B90B;
-  font-family: 'Museo_Slab';
+  color: #f0b90b;
+  font-family: 'Archivo Narrow', sans-serif;
 }
 
 section {
   height: 100%;
 }
 
-a, button {
-  color: #333;
+a,
+button {
+  color: #f0b90b;
   text-decoration: none;
   outline: none;
   border-style: hidden;
-  background: #FFF;
+  background: whitesmoke;
 }
 
 a:hover,
@@ -42,7 +47,7 @@ button:hover,
 button:active,
 button:focus,
 button.active {
-  background: #F0B90B;
+  background: #f0b90b;
   color: #333 !important;
   border-style: hidden;
   outline: none;
