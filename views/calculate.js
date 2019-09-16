@@ -41,26 +41,32 @@ module.exports = (state, emit) => {
       padding: 10px;
       color: #333;
     }
-    
+
     .balance {
       color: #333;
       opacity: 0.8;
       font-size: 1rem;
     }
-
-    `
+    
+  `
 
   const dist = new Tone.Distortion(0.2).toMaster()
   const noise = new Tone.Noise('pink').connect(dist)
   const synth = new Tone.Synth().toMaster()
   synth.volume.value = 0
-  
+
   // looking back at this code gives me chills, sorry
   // @todo set this up through an array and a .map function instead of this
   // gross, hardcoded mess
   return html`
     <section class="flex flex-column pa0 items-center tc justify-between">
-      <div class="flex tc f-subheadline pa5 items-center">
+      <div
+        class="flex tc f-subheadline pa5 items-center ${Number(
+          state.calculate.input
+        ) >= Number(state.wallet.BNBBalance)
+          ? 'red'
+          : 'green'}"
+      >
         ${state.calculate.formattedInput !== '0'
           ? state.calculate.formattedInput
           : ''}
@@ -69,10 +75,10 @@ module.exports = (state, emit) => {
       <span class="flex flex-row">
         ${state.wallet.allBalances.map((token, i) => {
           return html`
-          <button class="w-33 currency" onclick=${() => {
-            emit('selectCurrency', token.symbol)
-          }}
-          >${token.symbol}</button>
+            <button class="w-33 currency" onclick=${() => {
+                emit('selectCurrency', token.symbol)
+              }}
+            >${token.symbol}</button>
           `
         })}
       </span>
@@ -81,7 +87,7 @@ module.exports = (state, emit) => {
           if(token.symbol === state.calculate.currencySymbol){
             console.log('balance', token)
             return html`
-            <span class="balance">${Number(token.free).toFixed(2)}</span>
+              <span class="balance">${Number(token.free).toFixed(2)}</span>
             `
           }
         })}
@@ -178,8 +184,7 @@ module.exports = (state, emit) => {
           <button
             class="w-33"
             onclick=${() => {
-              noise.start()
-              setTimeout(() => noise.stop(), 100)
+              synth.triggerAttackRelease('G5', '8n')
               emit('numPress', 'DEL')
             }}
           >
