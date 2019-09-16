@@ -18,16 +18,10 @@ export function getWallet(client){
     return w
 }
 
-export async function getTokenBalance(client, address, symbol){
+export async function getAccountBalance(client, address){
     try {
-        let output;
         const b = await client.getBalance(address)
-        b.map((bal) => {
-            if(bal.symbol === symbol){
-                output = bal.free;
-            }
-        })
-        return output;
+        return b
     } catch (e) {
         return -1
     }

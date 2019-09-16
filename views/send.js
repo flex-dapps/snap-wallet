@@ -25,7 +25,7 @@ module.exports = (state, emit) => {
       state.calculate.input = ''
       state.calculate.formattedInput = ''
       state.wallet.afterConfirm = () => {
-        emit('wallet.sendTokens', addr, amount)
+        emit('wallet.sendTokens', addr, amount, state.calculate.currencySymbol)
         emit('pushState', '/')
       }
       emit('pushState', '/confirm')
@@ -59,6 +59,10 @@ module.exports = (state, emit) => {
     .action-overlay a::hover,
     .action-overlay a::active {
       background: #f0b90b !important;
+    }
+
+    .back {
+      color: #F0B90B;
     }
   `
 

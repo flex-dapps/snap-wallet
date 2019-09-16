@@ -4,6 +4,7 @@ const Tone = require('tone')
 
 const TITLE = 'TI-83'
 
+
 module.exports = (state, emit) => {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
@@ -26,13 +27,34 @@ module.exports = (state, emit) => {
       margin-bottom: 1rem;
       margin-right: 0.5rem;
     }
-  `
+
+    .bnb {
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 10px;
+      color: #333;
+      font-size: 1.5rem;
+    }
+    .currency {
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 10px;
+      color: #333;
+    }
+    
+    .balance {
+      color: #333;
+      opacity: 0.8;
+      font-size: 1rem;
+    }
+
+    `
 
   const dist = new Tone.Distortion(0.2).toMaster()
   const noise = new Tone.Noise('pink').connect(dist)
   const synth = new Tone.Synth().toMaster()
   synth.volume.value = 0
-
+  
   // looking back at this code gives me chills, sorry
   // @todo set this up through an array and a .map function instead of this
   // gross, hardcoded mess
@@ -44,6 +66,26 @@ module.exports = (state, emit) => {
           : ''}
         <span class="phat-caret"></span>
       </div>
+      <span class="flex flex-row">
+        ${state.wallet.allBalances.map((token, i) => {
+          return html`
+          <button class="w-33 currency" onclick=${() => {
+            emit('selectCurrency', token.symbol)
+          }}
+          >${token.symbol}</button>
+          `
+        })}
+      </span>
+      <span class="flex flex-row">
+        ${state.wallet.allBalances.map((token, i) => {
+          if(token.symbol === state.calculate.currencySymbol){
+            console.log('balance', token)
+            return html`
+            <span class="balance">${Number(token.free).toFixed(2)}</span>
+            `
+          }
+        })}
+      </span>
       <div class="keypad w-100 flex flex-column f1">
         <div class="flex flex-row">
           <button
@@ -173,3 +215,15 @@ module.exports = (state, emit) => {
     </section>
   `
 }
+
+
+
+
+// ${state.wallet.tokenBalances.map((token, i) => {
+//   return html`
+//   <button class="w-33 currency" onClick=${() => {
+//     emit('selectCurrency', token.symbol)
+//   }}
+//   >${token.symbol}</button>
+//   `
+// })}
