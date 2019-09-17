@@ -43,9 +43,9 @@ module.exports = (state, emit) => {
     }
 
     .balance {
-      color: #333;
       opacity: 0.8;
       font-size: 1rem;
+      
     }
     
   `
@@ -61,11 +61,7 @@ module.exports = (state, emit) => {
   return html`
     <section class="flex flex-column pa0 items-center tc justify-between">
       <div
-        class="flex tc f-subheadline pa5 items-center ${Number(
-          state.calculate.input
-        ) >= Number(state.wallet.BNBBalance)
-          ? 'red'
-          : 'green'}"
+        class="flex tc f-subheadline pa5 items-center "
       >
         ${state.calculate.formattedInput !== '0'
           ? state.calculate.formattedInput
@@ -82,7 +78,11 @@ module.exports = (state, emit) => {
           `
         })}
       </span>
-      <span class="flex flex-row">
+      <span class="flex flex-row ${Number(
+        state.calculate.input
+      ) >= Number(state.wallet.BNBBalance)
+        ? 'red'
+        : 'green'}">
         ${state.wallet.allBalances.map((token, i) => {
           if(token.symbol === state.calculate.currencySymbol){
             console.log('balance', token)
