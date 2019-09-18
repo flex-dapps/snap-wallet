@@ -60,10 +60,6 @@ module.exports = (state, emit) => {
     .action-overlay a::active {
       background: #f0b90b !important;
     }
-
-    .back {
-      color: #F0B90B;
-    }
   `
 
   return html`

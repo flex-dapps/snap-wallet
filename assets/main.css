@@ -35,9 +35,9 @@ section {
 a,
 button {
   color: #f0b90b;
+  box-sizing: border-box;
   text-decoration: none;
   outline: none;
-  border-style: hidden;
   background: whitesmoke;
 }
 
@@ -48,8 +48,8 @@ button:active,
 button:focus,
 button.active {
   background: #f0b90b;
+  box-sizing: border-box;
   color: #333 !important;
-  border-style: hidden;
   outline: none;
 }
 

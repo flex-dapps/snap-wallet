@@ -16,7 +16,6 @@ function view(state, emit) {
     }
 
     .header {
-      text-align: center;
       padding-top: 2rem;
       padding-bottom: 1rem;
       margin: auto;
@@ -26,13 +25,9 @@ function view(state, emit) {
       border-bottom: 1px solid black;
     }
 
-    .tokenListHeader {
-      padding-bottom: 1rem;
-    }
 
     .tokenName {
-      width: 83%;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
     }
 
     .subHeading {
@@ -69,11 +64,16 @@ function view(state, emit) {
     }
 
     .button {
-      font-size: 3.5rem;
+      color: #f0b90b;
+      box-sizing: border-box;
+      text-decoration: none;
       background-color: white;
-      border: #f0b90b 5px solid;
+      border: #f0b90b 3px solid;
+      display: flex;
+      justify-content: center;
+      font-size: 3.5rem;
+      width: 70vw;
       margin: 1rem;
-      padding: 0.5rem 9rem;
     }
 
     .disabled {
@@ -89,17 +89,15 @@ function view(state, emit) {
   const bep2 = state.wallet.tokenBalances;
 
   return html`
-    <section class="flex flex-column justify-between center pr4 pl4 pt5">
-      <div class="wallet-status">
+    <section class="flex flex-column justify-between center pt5">
+      <div class="wallet-status pr4 pl4">
         <div class="header">
           BNB:
           <img class="symbol" src=${bnbSymbol} />
           ${Number(state.wallet.BNBBalance).toFixed(2) || 0}
         </div>
         <div class="list flex flex-column">
-          <div class="tokenListHeader flex justify-center items-center">
-            <div class="tokenName gray">BEP2:</div>
-          </div>
+          <div class="tokenName gray">BEP2:</div>
           ${bep2.map((token, i) => {
             return html`
               <div class="token w-100 flex flex-row justify-around">
@@ -115,10 +113,10 @@ function view(state, emit) {
         </div>
       </div>
       <div
-        class="actions flex justify-center items-center flex-column w-100 tc"
+        class="actions flex justify-center items-center flex-column w-100 pr4 pl4 tc"
       >
-        <a class="button" href="/get">Get</a>
-        <a class="button" href="/send">Send</a>
+        <a class="button pa2" href="/get">Get</a>
+        <a class="button pa2" href="/send">Send</a>
       </div>
       <div class="block flex flex-column pt4 tc black">
         <p>binance X flexdapps 👊</p>

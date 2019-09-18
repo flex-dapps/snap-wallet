@@ -144,7 +144,7 @@ async function sendTokenTransaction(addrFrom, addrTo, value, asset, message){
     .get(sequenceURL)
     .then((res) => {
         // const sequence = res.data.sequence || 0
-        return state.client.transfer(addrFrom, 'tbnb1tw8mfezl50jwjwpw4h0dhn3ut76lqww6el3ut9', value, asset)
+        return state.client.transfer(addrFrom, addrTo, value, asset)
     })
     .then((result) => {
             console.log(result);

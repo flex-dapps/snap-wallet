@@ -27,7 +27,7 @@ module.exports = (state, emit) => {
     <section class="flex flex-column justify-around items-center pa4">
       <img class="w-100" src=${state.wallet.qr} />
       <div class="actions flex flex-column tc">
-        <a class="button" href="/">Back</a>
+        <a class="button pa2" href="/">Back</a>
       </div>
     </section>
   `

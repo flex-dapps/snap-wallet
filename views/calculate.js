@@ -19,6 +19,7 @@ module.exports = (state, emit) => {
     .keypad div span {
       height: 6rem;
       font-color: black;
+      border-style: hidden;
     }
 
     .proceed {
@@ -40,12 +41,12 @@ module.exports = (state, emit) => {
       margin-right: 10px;
       padding: 10px;
       color: #333;
+      border-style: hidden;  
     }
 
     .balance {
       opacity: 0.8;
       font-size: 1rem;
-      
     }
     
   `
