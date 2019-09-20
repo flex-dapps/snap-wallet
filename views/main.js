@@ -164,26 +164,3 @@ function view(state, emit) {
     </section>
   `
 }
-
-/**
- *  
- *  <div class="vip-status">
-      VIP${state.vip.meVip ? '_' + state.vip.meIndex : ''}=${state.vip.meVip
-        ? 'TRUE'
-        : 'FALSE'}
-    </div> 
- * 
-◆
-
-<div class="vip-status">
-  DEBUG_BAL=${Number(state.wallet.ethBalance)
-    ? Number(state.wallet.ethBalance).toFixed(5)
-    : 0}
-</div>
-
-
-<img class="logo"
-          src=${snapLogo} />
-
-
- */

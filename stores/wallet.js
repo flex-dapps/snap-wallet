@@ -75,19 +75,11 @@ async function store(state, emitter) {
     console.log('bnbClient', state.client)
     console.log('wallet', state.wallet)
     
+    // flag wallet as initialised, then re-render
     state.wallet.init = true;
     emitter.emit('render');
   }
-  
-  
-  
-  // flag wallet as initialised.
 
-
-  // set up an event listener and notifications for the transfer function
-  // setupTransferNotifications(wallet, state)
-
-  // setTokenBalance()
 
   // a whole bunch of events for you to configure the 'confirm' screen in the
   // wallet. YOU DON'T HAVE TO USE THE CONFIRM SCREEN, this is just a handy
@@ -152,75 +144,5 @@ async function store(state, emitter) {
           console.error('error', error);
       });
   }
-  // ------------------ NOTIFICATION STUFF ------------------------
 
-  // gets the default token sending messages (should allow tokens to set a
-  // symbol or something like that)
-  function getDefaultTokenMessages(value) {
-    return {
-      txSent: () =>
-        `Sending ${state.CURRENCY_SYMBOL}${Number(value).toLocaleString()}`,
-      txConfirmed: () =>
-        `Sent ${state.CURRENCY_SYMBOL}${Number(value).toLocaleString()}`,
-      txStall: () => `Something's wrong...`,
-      txConfirmed: () =>
-        `Sent ${state.CURRENCY_SYMBOL}${Number(value).toLocaleString()}`
-    }
-  }
-
-  function setupTransferNotifications(
-    { tokenContract, address, refresh },
-    state // we can't pull assist off state because it's not initialised yet
-  ) {
-    tokenContract.on(tokenContract.filters.Transfer(null, null), (f, t, v) => {
-      if (t.toLowerCase() === address.toLowerCase()) {
-        state.assist.notify(
-          'success',
-          `Received ${state.CURRENCY_SYMBOL}${v.toNumber().toLocaleString()}!`
-        )
-      } else if (f.toLowerCase() === address.toLowerCase()) {
-        // we were the person who sent the money but we get this notification
-        // already from the send function
-        // state.assist.notify('success', `Sent ${state.CURRENCY_SYMBOL}${v.toNumber().toLocaleString()}!`)
-      }
-      refresh()
-    })
-  }
-
-  // ----------- MOVED FUNCTIONS (now live in stores/eth/utils) ----------------
-
-  // async function getEthbalance() {
-  //   wallet.ethBalance = ethers.utils.formatEther(
-  //     await state.provider.getBalance(wallet.address)
-  //   )
-  // }
-
-  // function getTokenContract(address, abi, provider, burner) {
-  //   const c = new ethers.Contract(address, abi, provider)
-  //   // connect our burner account with the contract so we can send txs
-  //   return c.connect(burner)
-  // }
-  
-  // gets the balance of a given user on a given token contract
-  // async function getTokenBalance(contract, address) {
-  //   try {
-  //     const b = await contract.balanceOf(address)
-  //     return b.toNumber()
-  //   } catch (e) {
-  //     return -1
-  //   }
-  // }
-
-  // gets the burner wallet from localstorage or else creates a new one
-  // function getWallet(provider) {
-  //   let w = localStorage.getItem('wallet')
-  //   if (w) {
-  //     w = new ethers.Wallet(JSON.parse(w).signingKey.privateKey, provider)
-  //   } else {
-  //     w = ethers.Wallet.createRandom()
-  //     localStorage.setItem('wallet', JSON.stringify(w))
-  //     w = w.connect(provider)
-  //   }
-  //   return w
-  // }
 }
