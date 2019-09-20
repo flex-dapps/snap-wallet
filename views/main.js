@@ -63,6 +63,35 @@ function view(state, emit) {
       color: #333;
     }
 
+    .loading {
+      width: 35%;
+      margin: auto;
+      -webkit-animation: fade 1s alternate infinite;
+      animation: fade 1s alternate infinite;
+      display: block;
+    }
+
+    @-webkit-keyframes fade {
+      0% {
+        opacity: 1;
+      }
+    
+      100% {
+        opacity: 0;
+      }
+    
+    }
+    
+    @keyframes fade {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    
+
     .button {
       color: #f0b90b;
       box-sizing: border-box;
@@ -85,42 +114,53 @@ function view(state, emit) {
       color: unset;
     }
   `
-  
+
+  const LOADING_ANIMATION = html`
+    <img class="loading" src=${bnbSymbol} />
+  `
   const bep2 = state.wallet.tokenBalances;
 
-  return html`
-    <section class="flex flex-column justify-between center pt5">
-      <div class="wallet-status pr4 pl4">
-        <div class="header">
-          BNB:
-          <img class="symbol" src=${bnbSymbol} />
-          ${Number(state.wallet.BNBBalance).toFixed(2) || 0}
-        </div>
-        <div class="list flex flex-column">
-          <div class="tokenName gray">BEP2:</div>
-          ${bep2.map((token, i) => {
-            return html`
-              <div class="token w-100 flex flex-row justify-around">
-                <div class="w-33">
-                  ${token.symbol}
-                </div>
-                <div class="amt w-33">
-                  ${Number(token.free).toFixed(2)}
-                </div>
+
+  const WALLET =  html`
+    <div class="wallet-status mt5 pr4 pl4">
+      <div class="header">
+        BNB:
+        <img class="symbol" src=${bnbSymbol} />
+        ${Number(state.wallet.BNBBalance).toFixed(2) || 0}
+      </div>
+      <div class="list flex flex-column">
+        <div class="tokenName gray">BEP2:</div>
+        ${bep2.map((token, i) => {
+          return html`
+            <div class="token w-100 flex flex-row justify-around">
+              <div class="w-33">
+                ${token.symbol}
               </div>
-            `
-          })}
-        </div>
+              <div class="amt w-33">
+                ${Number(token.free).toFixed(2)}
+              </div>
+            </div>
+          `
+        })}
       </div>
-      <div
-        class="actions flex justify-center items-center flex-column w-100 pr4 pl4 tc"
-      >
-        <a class="button pa2" href="/get">Get</a>
-        <a class="button pa2" href="/send">Send</a>
-      </div>
-      <div class="block flex flex-column pt4 tc black">
-        <p>binance X flexdapps 👊</p>
-      </div>
+    </div>
+    <div
+      class="actions flex justify-center items-center flex-column w-100 pr4 pl4 tc"
+    >
+      <a class="button pa2" href="/get">Get</a>
+      <a class="button pa2" href="/send">Send</a>
+    </div>
+    <div class="block flex flex-column pt4 tc black">
+      <p>binance X flexdapps 👊</p>
+    </div>
+  `;
+
+  
+  console.log('state.wallet.init', state.wallet.init)
+
+  return html`
+    <section class="flex flex-column justify-between center">
+        ${state.wallet.init ? WALLET : LOADING_ANIMATION}
     </section>
   `
 }
