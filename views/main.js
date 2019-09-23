@@ -125,13 +125,7 @@ function view(state, emit) {
     <img class="loading" src=${bnbSymbol} />
   `
 
-  // const bep2 = state.wallet.tokenBalances;
-  const bep2 = [];
-
-  console.log('bep2', bep2)
-  console.log('bep2 len', bep2.length)
-  console.log('bep2 bool', (bep2.length > 0))
-
+  const bep2 = state.wallet.tokenBalances;
 
   const BEP2_LIST = html`
     <div class="list flex flex-column">
