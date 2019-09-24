@@ -140,40 +140,7 @@ function view(state, emit) {
       <img class="loading" src=${bnbSymbol} />
     `
 
-  // const bep2 = state.wallet.tokenBalances;
-
-  console.log('showAllBEP2', state.wallet.showAllBEP2);
-
-  const bep2 = [
-    {
-      symbol: 'blah-0',
-      free: 550,
-  },
-  {
-    symbol: 'blah-1',
-    free: 550,
-  },
-  {
-    symbol: 'blah-2',
-    free: 550,
-  },
-  {
-    symbol: 'blah-3',
-    free: 550,
-  },
-  {
-    symbol: 'blah-4',
-    free: 420,
-  },
-  {
-    symbol: 'blah-5',
-    free: 420,
-  },
-  {
-    symbol: 'blah-6',
-    free: 420,
-  },
-]
+  const bep2 = state.wallet.tokenBalances;
 
   function toggleExpansion(){
     state.wallet.showAllBEP2 = !state.wallet.showAllBEP2;
@@ -238,7 +205,7 @@ function view(state, emit) {
       }
       })}
       ${state.wallet.showAllBEP2 ? ALL_BEP2 : ''}
-      ${TOGGLE_MANY_BEP2}
+      ${(bep2.length >= 4) ? TOGGLE_MANY_BEP2: ''}
     </div>
   `
 
