@@ -22,6 +22,7 @@ const DEFAULT_STATE = {
   allBalances: [],
   BNBBalance: 0,
   tokenBalances:[],
+  showAllBEP2: false,
   address: '0x0000000000000000000000000000000000000000',
   burner: {
     signingKey: {
