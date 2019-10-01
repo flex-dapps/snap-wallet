@@ -18,7 +18,6 @@
     "ethers": "^4.0.27",
     "fs": "0.0.1-security",
     "jsqr": "^1.2.0",
-    "node-hid": "^0.7.9",
     "path": "^0.12.7",
     "qrcode": "^1.3.3",
     "sheetify": "^7.3.3",
